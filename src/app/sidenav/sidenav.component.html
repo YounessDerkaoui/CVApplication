@@ -1,0 +1,22 @@
+<div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed': ''">
+    <div class="logo-container">
+        <div class="logo">
+            <img [src]="collapsed ? 'assets/images/logo-berexia.png' : 'assets/images/logo-letter.png'"
+             (click)="toggleCollapse()" 
+             [class]="collapsed ? 'logo-img' : 'logo-letter'">
+        </div>
+    </div>
+    <br><br>
+    <ul class="sidenav-nav">
+        <li class="sidenav-nav-item" *ngFor="let data of navData" (click)="returnRoute()">
+            <a class="sidenav-nav-link" [routerLink]="[data.routeLink]"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}">
+            <i class="sidenav-link-icon" [class]="data.icon"></i>
+            <span class="sidenav-link-text" *ngIf="collapsed">
+                {{data.label}}
+            </span>
+            </a>
+        </li>
+    </ul>
+</div>

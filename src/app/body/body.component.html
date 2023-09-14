@@ -1,0 +1,7 @@
+<div class="body" [ngClass]="getBodyClass()"
+ style="height: 50px; background-color: rgb(151, 151, 179);">
+    <h1>{{activeRouteLabel}}</h1>
+</div>
+<div class="body" [ngClass]="getBodyClass()">
+    <router-outlet></router-outlet>
+</div>
