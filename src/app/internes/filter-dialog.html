@@ -1,0 +1,74 @@
+<h1 mat-dialog-title>Filtrer la liste des employés</h1>
+<mat-dialog-content class="mat-typography">
+    <div class="filter-div">
+        <!--Nom-->
+        <mat-form-field>
+            <mat-label>Nom</mat-label>
+            <input matInput autocomplete="off">
+        </mat-form-field>
+        <!--Prénom-->
+        <mat-form-field>
+            <mat-label>Prénom</mat-label>
+            <input matInput autocomplete="off">
+        </mat-form-field>
+        <!--Competences-->
+        <mat-form-field>
+            <mat-label>Compétences</mat-label>
+            <input matInput autocomplete="off">
+        </mat-form-field>
+    </div>
+
+    <div class="filter-div">
+        <!--Technologies-->
+        <mat-form-field>
+            <mat-label>Technologies</mat-label>
+            <input matInput autocomplete="off">
+        </mat-form-field>
+        <!--Projet-->
+        <mat-form-field>
+            <mat-label>Projet</mat-label>
+            <mat-select [formControl]="projects" multiple>
+              <mat-select-trigger>
+                {{projects.value?.[0] || ''}}
+                <span *ngIf="(projects.value?.length || 0) > 1" class="example-additional-selection">
+                  (+{{(projects.value?.length || 0) - 1}} {{projects.value?.length === 2 ? 'autre' : 'autres'}})
+                </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let topping of projectsList" [value]="topping">{{topping}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>
+
+    <div class="filter-div">
+        <!--Post occupé-->
+        <mat-form-field>
+            <mat-label>Post Occupé</mat-label>
+            <mat-select [formControl]="post" multiple>
+              <mat-select-trigger>
+                {{post.value?.[0] || ''}}
+                <span *ngIf="(post.value?.length || 0) > 1" class="example-additional-selection">
+                  (+{{(post.value?.length || 0) - 1}} {{post.value?.length === 2 ? 'autre' : 'autres'}})
+                </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let topping of postList" [value]="topping">{{topping}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!--Formations/Certificats-->
+        <mat-form-field>
+            <mat-label>Formation/Certificat</mat-label>
+            <mat-select [formControl]="formations" multiple>
+              <mat-select-trigger>
+                {{formations.value?.[0] || ''}}
+                <span *ngIf="(formations.value?.length || 0) > 1" class="example-additional-selection">
+                  (+{{(formations.value?.length || 0) - 1}} {{formations.value?.length === 2 ? 'autre' : 'autres'}})
+                </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let topping of formationsList" [value]="topping">{{topping}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-flat-button extended color="accent" mat-dialog-close>Annuler</button>
+    <button mat-flat-button extended color="primary" [mat-dialog-close]="true" cdkFocusInitial>Appliquer</button>
+</mat-dialog-actions>

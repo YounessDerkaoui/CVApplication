@@ -1,6 +1,11 @@
-<div class="body" [ngClass]="getBodyClass()"
- style="height: 50px; background-color: rgb(151, 151, 179);">
-    <h1>{{activeRouteLabel}}</h1>
+<div class="body top-nav" [ngClass]="getBodyClass()"
+ style="height: 8.5rem;">
+    <h1 style="font-size: xx-large;">{{activeRouteLabel}}</h1>
+    <div class="right-items">
+        <mat-icon matBadge="4"  matBadgeSize="small" color="primary" matBadgeColor="accent"
+         (click)="openDialog('100ms', '100ms')" class="clickable icon-display">notifications</mat-icon>
+        <span class="cdk-visually-hidden">Notifications</span>
+    </div>
 </div>
 <div class="body" [ngClass]="getBodyClass()">
     <router-outlet></router-outlet>

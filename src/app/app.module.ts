@@ -9,7 +9,7 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import { MatCardModule } from '@angular/material/card'
 import { MatFormFieldModule } from '@angular/material/form-field'
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { BodyComponent } from './body/body.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -17,6 +17,14 @@ import { HomeComponent } from './home/home.component';
 import { InternesComponent } from './internes/internes.component';
 import { ExternesComponent } from './externes/externes.component';
 import { SettingsComponent } from './settings/settings.component';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
+import { MatSortModule } from '@angular/material/sort';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @NgModule({
   declarations: [
@@ -28,7 +36,7 @@ import { SettingsComponent } from './settings/settings.component';
     HomeComponent,
     InternesComponent,
     ExternesComponent,
-    SettingsComponent
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +46,15 @@ import { SettingsComponent } from './settings/settings.component';
     MatIconModule,
     MatCardModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatBadgeModule,
+    MatDialogModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatCheckboxModule,
+    FormsModule,
+    MatSortModule,
+    NgxDropzoneModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
