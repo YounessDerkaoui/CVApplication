@@ -50,6 +50,17 @@ background: #555;
     }
 }
 
+.right-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: auto;
+
+    > * {
+        margin-left: 30px;
+    }
+}
+
 .file-container {
     width: 400px;
     border-radius: 3rem;

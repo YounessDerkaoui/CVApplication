@@ -3,7 +3,11 @@
     <div class="files">
         
         <div class="input-container">
-            <div>
+            <div class="right-container">
+                <button mat-fab extended color="primary">
+                    <mat-icon>add</mat-icon>
+                    Générer CV
+                </button>
                 <mat-form-field appearance="outline" style="margin-top: 20px;">
                     <input matInput (keyup)="applyFilter($event)" placeholder="Chercher par nom ou prénom" autocomplete="off" #input>
                 </mat-form-field>
