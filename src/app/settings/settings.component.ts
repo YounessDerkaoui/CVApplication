@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class SettingsComponent {
 
+  isInputReadonly = true;
+
+  toggleInput() {
+    this.isInputReadonly = !this.isInputReadonly;
+  }
+
 }

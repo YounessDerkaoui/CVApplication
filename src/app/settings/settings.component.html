@@ -1,0 +1,38 @@
+<div class="general">
+    <mat-form-field>
+        <mat-label>Nom d'utilisateur</mat-label>
+        <input matInput autocomplete="off" [readonly]="isInputReadonly">
+        <mat-icon matSuffix class="clickable" color="primary"
+        (click)="toggleInput()">
+        change_circle
+        </mat-icon>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Adresse mail</mat-label>
+        <input matInput autocomplete="off" readonly>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Poste Occupé</mat-label>
+        <input matInput autocomplete="off" readonly>
+    </mat-form-field>
+
+    <mat-divider></mat-divider>
+
+    <mat-form-field>
+        <mat-label>Mot de passe actuel</mat-label>
+        <input matInput autocomplete="off" readonly>
+        <mat-icon matSuffix color="primary">key</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Nouveau mot de passe</mat-label>
+        <input matInput autocomplete="off">
+    </mat-form-field>
+
+    <div>
+        <button mat-flat-button extended color="primary" class="right-button">Modifier le mot de passe</button>
+    </div>
+
+</div>

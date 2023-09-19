@@ -1,0 +1,47 @@
+.general {
+    background-color: #fff;
+    border-radius: 3rem;
+    margin: 3rem;
+    height: 90%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    
+    > * {
+        margin-right: 7rem;
+        margin-left: 7rem;
+        margin-top: 1.7rem;
+    }
+}
+
+.files::-webkit-scrollbar {
+    width: 12px;
+}
+    
+.files::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+.files::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+.files::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.right-button {
+    width: 20rem;
+}
+
+.align-right {
+    display: flex;
+    flex-direction: row;
+    margin-right: auto;
+}

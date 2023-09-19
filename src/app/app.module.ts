@@ -25,6 +25,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { MatSortModule } from '@angular/material/sort';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     FormsModule,
     MatSortModule,
     NgxDropzoneModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
