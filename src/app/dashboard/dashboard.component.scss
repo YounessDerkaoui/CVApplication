@@ -1,0 +1,52 @@
+.horizontal-div {
+    display: flex;
+    flex-direction: row;
+    //background: #f4f7fa;
+    box-sizing: border-box;
+    
+    > * {
+        margin-right: 3rem;
+        margin-left: 3rem;
+    }
+}
+
+.vertical-div {
+    display: flex;
+    flex-direction: column;
+    //background: #f4f7fa;
+    box-sizing: border-box;
+    
+    > * {
+        margin: 1rem;
+    }
+}
+
+.top-card{
+    height: 15rem;
+    width: 50rem;
+    border-radius: 3rem;
+
+    display: flex;
+    flex-direction: column;
+    
+    > * {
+        margin: 2.5rem;
+    }
+}
+
+.bottom-card{
+    height: 25rem;
+    width: 50rem;
+    border-radius: 3rem;
+
+    display: flex;
+    flex-direction: column;
+    
+    > * {
+        margin: 2.5rem;
+    }
+}
+
+.icon {
+    text-align: center;
+}
