@@ -1,0 +1,21 @@
+<div class="form-banner__completed form-banner__editable">
+  <p class="form-banner__list-item-text" style="margin-bottom: 0px">
+    <span class="list-item__main-text">{{ mainText }} </span>
+    <span class="list-item-sub-text"> {{ subText }} </span>
+  </p>
+
+  <div class="form-banner__btn-container" style="margin-left: 200px">
+    <button
+      type="button"
+      class="btn btn__edit-item"
+      (click)="onEditItem()">
+      <span class="btn-icon material-symbols-outlined">edit</span>
+    </button>
+    <button
+      type="button"
+      class="btn btn__delete-item"
+      (click)="onDeleteItem()">
+      <span class="btn-icon material-symbols-outlined">delete</span>
+    </button>
+  </div>
+</div>

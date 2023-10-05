@@ -1,0 +1,60 @@
+<form class="form form__container form__education-info"
+      [formGroup]="educForm"
+      (ngSubmit)="submitEducationInfo()"
+      (keydown)="onKeyDown($event)">
+  <h1 class="form-title">FORMATIONS & DIPLOMES</h1>
+  <div class="form-banner__container">
+    <app-form-banner *ngFor="let educInfo of educationInfo"
+                     [id]="educInfo.id"
+                     [subText]="educInfo.degreeTitle"
+                     (deleteItem)="deleteEducationInfo(educInfo.id)"
+                     (editItem)="editEducationInfo(educInfo.id)"
+    ></app-form-banner>
+  </div>
+  <fieldset class="form-fieldset form__education-info">
+    <label class="form-label">
+      <span class="form-label__title">Intitulé du Diplôme :</span>
+      <input type="text"
+             name="degreeTitle"
+             class="form-input form-input__education-institution"
+             formControlName="degreeTitle"
+      />
+    </label>
+    <label class="form-label">
+      <span class="form-label__title">Établissement délivrant :</span>
+      <input type="text"
+             name="institution"
+             class="form-input form-input__degree-program"
+             formControlName="institution"/>
+    </label>
+    <label class="form-label">
+      <span class="form-label__title">Année de début :</span>
+      <input type="month"
+             name="startingYear"
+             class="form-input form-input__starting-year"
+             formControlName="startingYear"/>
+    </label>
+    <div class="form-label">
+      <span class="form-label__title">En cours :</span>
+      <div class="switch-ongoing">
+        <input type="checkbox"
+               class="form-input switch-ongoing__input"
+               name="onGoing"
+               id="ongoingSwitchEduc"
+               formControlName="onGoing"
+        />
+        <label aria-hidden="true" class="switch-ongoing__label"
+               for="ongoingSwitchEduc">On</label>
+        <div aria-hidden="true" class="switch-ongoing__marker"></div>
+      </div>
+    </div>
+    <label *ngIf="!isOnGoing" class="form-label">
+      <span class="form-label__title">Année de fin :</span>
+      <input type="month"
+             name="graduatingYear"
+             class="form-input form-input__starting-year"
+             formControlName="graduatingYear"/>
+    </label>
+  </fieldset>
+  <button type="submit" class="btn btn__submit">Soumettre</button>
+</form>

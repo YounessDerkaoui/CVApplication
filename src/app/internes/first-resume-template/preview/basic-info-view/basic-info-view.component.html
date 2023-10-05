@@ -1,0 +1,17 @@
+<section class="preview-area preview-area__basic-info" >
+  <div class="image-container">
+    <img src="assets/images/logo-letter.png"
+         class="img-profile">
+  </div>
+  <h1 class="preview__name">
+    {{ basicInfo.firstName | capitalizeAllWords }} {{ basicInfo.lastName | uppercase }}
+  </h1>
+  <h2 class="preview__job-title">
+    Rôle dans le projet :
+    <span> {{ basicInfo.occupation }} </span>
+  </h2>
+  <p class="preview__self-summary">
+    Nombre d’années dans le domaine informatique :
+    <span> {{ basicInfo.yearsOfExp }} ans </span>
+  </p>
+</section>

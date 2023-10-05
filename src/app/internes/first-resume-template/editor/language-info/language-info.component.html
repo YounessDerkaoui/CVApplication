@@ -1,0 +1,52 @@
+<form class="form form__container form__education-info"
+      [formGroup]="langForm"
+      (ngSubmit)="submitLanguageInfo()"
+      (keydown)="onKeyDown($event)">
+  <h1 class="form-title">LANGUES</h1>
+  <div class="form-banner__container">
+    <app-form-banner *ngFor="let langInfo of languageInfo"
+                     [id]="langInfo.id"
+                     [subText]="langInfo.language"
+                     (deleteItem)="deleteLanguageInfo(langInfo.id)"
+                     (editItem)="editLanguageInfo(langInfo.id)"
+    ></app-form-banner>
+  </div>
+  <fieldset class="form-fieldset form__education-info">
+    <label class="form-label">
+      <span class="form-label__title">Langue :</span>
+      <input type="text"
+             name="language"
+             class="form-input form-input__education-institution"
+             formControlName="language"
+      />
+    </label>
+    <mat-form-field>
+      <mat-label>Parler</mat-label>
+      <mat-select formControlName="speak">
+        <mat-option *ngFor="let proficiency of proficiencyOptions"
+                    [value]="proficiency">
+          {{ proficiency }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Lire</mat-label>
+      <mat-select formControlName="read">
+        <mat-option *ngFor="let proficiency of proficiencyOptions"
+                    [value]="proficiency">
+          {{ proficiency }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Ecrire</mat-label>
+      <mat-select formControlName="write">
+        <mat-option *ngFor="let proficiency of proficiencyOptions"
+                    [value]="proficiency">
+          {{ proficiency }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </fieldset>
+  <button type="submit" class="btn btn__submit">Soumettre</button>
+</form>

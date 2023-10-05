@@ -1,0 +1,26 @@
+<mat-grid-list cols="2" rowHeight="2:1">
+
+  <mat-grid-tile>
+    <button mat-fab extended color="primary" [routerLink]="['../']">
+      Tableau de Bord
+    </button>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <div class='internalMatGrid' >
+      <mat-grid-list cols="2" rowHeight="2:1">
+        <mat-grid-tile>
+          <button mat-fab extended color="primary"
+                  [routerLink]="['use']"
+                  [queryParams]="{template: 'classic'}">
+            Use
+          </button>
+        </mat-grid-tile>
+        <mat-grid-tile>2</mat-grid-tile>
+        <mat-grid-tile>3</mat-grid-tile>
+        <mat-grid-tile>4</mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </mat-grid-tile>
+
+</mat-grid-list>

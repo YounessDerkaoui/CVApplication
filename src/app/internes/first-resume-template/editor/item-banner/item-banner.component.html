@@ -1,0 +1,11 @@
+<div class="submitted-item__wrapper">
+  <span class="submitted-item__name"
+        [attr.data-id]="id">{{ name }}
+  </span>
+  <button
+    class="submitted-item__delete btn-icon material-symbols-outlined"
+    type="button"
+    (click)="onDeleteItem()">
+    close
+  </button>
+</div>

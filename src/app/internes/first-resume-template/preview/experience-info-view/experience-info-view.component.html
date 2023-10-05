@@ -1,0 +1,34 @@
+<section class="preview-area preview-area__exp-info">
+  <h1 class="preview-title">C-EXPERIENCES PROFESSIONNELLES :</h1>
+  <table class="table table-bordered" style="text-align: center">
+    <thead>
+      <tr>
+        <th>Intitulé du projet SI</th>
+        <th>Organisme concerné par le projet</th>
+        <th>Date du projet</th>
+        <th>Profil/Rôle dans le projet</th>
+        <th>Actions projet accomplies</th>
+      </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngIf="experienceInfo.length">
+      <tr *ngFor="let expInfo of experienceInfo" class="preview-unit__educ-info">
+        <td>{{ expInfo.jobTitle | emptyStringToDash }}</td>
+        <td>{{ expInfo.company | emptyStringToDash }}</td>
+        <td *ngIf="expInfo.onGoing">
+          {{ expInfo.startingYear }}-à aujourd'hui
+        </td>
+        <td *ngIf="!expInfo.onGoing">
+          {{ expInfo.endingYear }}-{{ expInfo.startingYear }}
+        </td>
+        <td>{{ expInfo.role | emptyStringToDash }}</td>
+        <td >
+          <ul *ngFor="let action of expInfo.additionalInfo">
+            - {{ action.content }}
+          </ul>
+        </td>
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
+</section>

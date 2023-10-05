@@ -1,0 +1,23 @@
+<section class="preview-area preview-area__educ-info">
+  <h1 class="preview-title">D-LANGUES :</h1>
+  <table class="table table-bordered" style="text-align: center">
+    <thead>
+    <tr>
+      <th>Langue</th>
+      <th>Parler</th>
+      <th>Lire</th>
+      <th>Écrire</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngIf="languageInfo.length">
+      <tr *ngFor="let lang of languageInfo" class="preview-unit__educ-info">
+        <td>{{ lang.language | emptyStringToDash }}</td>
+        <td>{{ lang.speak | emptyStringToDash }}</td>
+        <td>{{ lang.read | emptyStringToDash }}</td>
+        <td>{{ lang.write | emptyStringToDash }}</td>
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
+</section>

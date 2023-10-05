@@ -1,0 +1,35 @@
+<form
+  [formGroup]="skillForm"
+  class="form form__container form__other-info"
+  (submit)="submitSkillInfo()"
+  (keydown)="handleEnterKey($event)">
+  <h1 class="form-title">DOMAINE DE COMPETENCES</h1>
+  <span class="form-subtitle">
+  Quels sont vos domaines d'expertise ainsi que les outils que vous maîtrisez ?
+  </span>
+  <div class="form-banner__container">
+    <app-form-banner *ngFor="let skillInfo of skillsInfo"
+                     [id]="skillInfo.id"
+                     [subText]="skillInfo.content"
+                     (deleteItem)="deleteSkillInfo($event)"
+                     (editItem)="editSkillInfo($event)"
+    ></app-form-banner>
+  </div>
+  <fieldset class="form-fieldset form__other-info">
+    <label class="form-label">
+          <span class="form-label__title">
+            Ajouter une compétence ou un groupe de technologies
+          </span>
+      <textarea
+        name="content"
+        rows="7"
+        class="form-input form-input__self-summary"
+        formControlName="content"
+        (keydown)="AddInfo($event)"
+      ></textarea>
+    </label>
+  </fieldset>
+  <button type="submit" class="btn btn__submit">
+    Soumettre
+  </button>
+</form>

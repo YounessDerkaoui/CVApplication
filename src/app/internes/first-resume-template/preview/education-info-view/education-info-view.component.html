@@ -1,0 +1,27 @@
+<section class="preview-area preview-area__educ-info">
+  <h1 class="preview-title">B-FORMATIONS & DIPLOMES :</h1>
+  <h2 class="preview__institution">Cursus universitaire :</h2>
+  <table class="table table-bordered" style="text-align: center">
+    <thead>
+      <tr>
+        <th>Intitulé du Diplôme</th>
+        <th>Établissement délivrant</th>
+        <th>Année d'obtention</th>
+      </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngIf="educationInfo.length">
+        <tr *ngFor="let educInfo of educationInfo" class="preview-unit__educ-info">
+          <td>{{ educInfo.degreeTitle | emptyStringToDash }}</td>
+          <td>{{ educInfo.institution | emptyStringToDash }}</td>
+          <td *ngIf="educInfo.onGoing">
+            {{ educInfo.startingYear }}-à aujourd'hui
+          </td>
+          <td *ngIf="!educInfo.onGoing">
+            {{ educInfo.graduatingYear }}-{{ educInfo.startingYear }}
+          </td>
+        </tr>
+    </ng-container>
+    </tbody>
+  </table>
+</section>

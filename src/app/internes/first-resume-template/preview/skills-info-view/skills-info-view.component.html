@@ -1,0 +1,11 @@
+<section class="preview-area preview-area__skills-info">
+  <h1 class="preview-title">A-DOMAINE DE COMPETENCES :</h1>
+  <h2 class="preview__skill-category">Connaissances Techniques :</h2>
+  <ng-container *ngIf="skillsInfo.length">
+    <div *ngFor="let skill of skillsInfo" class="preview__skill-container">
+      <div  class="preview__skill-item">
+        {{ skill.content }}
+      </div>
+    </div>
+  </ng-container>
+</section>

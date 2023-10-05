@@ -1,0 +1,41 @@
+<form class="form form__container form__basic-info">
+  <h1 class="form-title">Informations de base</h1>
+  <fieldset class="form-fieldset form__basic-info">
+    <label class="form-label">
+      <span class="form-label__title">Prénom :</span>
+      <input
+        type="text"
+        name="firstName"
+        class="form-input form-input__first-name"
+        [(ngModel)]="basicInfo.firstName"
+      />
+    </label>
+    <label class="form-label">
+      <span class="form-label__title">Nom :</span>
+      <input
+        type="text"
+        name="lastName"
+        class="form-input form-input__last-name"
+        [(ngModel)]="basicInfo.lastName"
+      />
+    </label>
+    <label class="form-label">
+      <span class="form-label__title">Titre professionnel :</span>
+      <input
+        type="text"
+        name="occupation"
+        class="form-input form-input__occupation"
+        [(ngModel)]="basicInfo.occupation"
+      />
+    </label>
+    <label class="form-label">
+      <span class="form-label__title">Années d'expérience :</span>
+      <input
+        type="number"
+        name="yearsOfExp"
+        class="form-input form-input__self-summary"
+        [(ngModel)]="basicInfo.yearsOfExp"
+      />
+    </label>
+  </fieldset>
+</form>
