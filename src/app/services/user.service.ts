@@ -17,11 +17,12 @@ export class UserService {
   }
 
   uploadUserDetails(userDetails: IFormData): Observable<any> {
+    const url = 'http://127.0.0.1:5000/api/v1/users/1';
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post<any>(environment.baseUrl, userDetails, httpOptions);
+    return this.http.post<any>(url, userDetails, httpOptions);
   }
 }

@@ -66,7 +66,7 @@
   border: none;
   position: relative;
   place-self: center;
-  margin-left: 200px;
+  margin-left: 120px;
   display: flex;
   flex-direction: row;
 }
@@ -212,6 +212,7 @@
   }
 
   &-input__items-wrapper {
+    margin-top: 15px;
     position: relative;
     width: fit-content;
     display: flex;
@@ -251,6 +252,7 @@
     font-family: var(--font-raleway);
     color: black;
     line-height: normal;
+    overflow: auto;
   }
 
   &__main-col {
@@ -586,7 +588,7 @@
     font-size: 16px;
     background-color: transparent;
     color: var(--color-text-light);
-
+    border: black;
     &:focus,
     &:hover {
       transform: scale(1.1);
