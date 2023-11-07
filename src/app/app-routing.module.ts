@@ -23,6 +23,7 @@ const routes: Routes = [
       { path: 'externes', component: ExternesComponent },
       { path: 'settings', component: SettingsComponent }
     ]},
+  { path: '**', redirectTo: '' , pathMatch: 'full'},
 ];
 
 @NgModule({

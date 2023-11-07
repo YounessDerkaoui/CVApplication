@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {IFormData, LanguageProficiency} from './first-resume-template'
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-first-resume-template',
@@ -20,9 +21,20 @@ export class FirstResumeTemplateComponent implements OnInit{
     experienceInfo: [],
     languageInfo:[]
   };
-  //todo check the effect of LanguageProficiency.NOT_AT_ALL
+
+  constructor(private userService: UserService) {
+  }
 
   ngOnInit(): void {
+    this.userService.getUserDetails(1).subscribe({
+      next: (data)=>{
+        this.formData = data;
+        console.log(data)
+      },
+      error: (err)=>{
+        console.log(err);
+      }
+    });
   }
 
   downloadResume() {

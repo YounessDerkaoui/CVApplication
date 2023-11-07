@@ -47,6 +47,7 @@ import { CapitalizeAllWordsPipe } from './pipes/capitalize-all-words.pipe';
 import {MatSelectModule} from "@angular/material/select";
 import { EmptyStringToDashPipe } from './pipes/empty-string-to-dash.pipe';
 import { LanguageInfoViewComponent } from './internes/first-resume-template/preview/language-info-view/language-info-view.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -98,7 +99,8 @@ import { LanguageInfoViewComponent } from './internes/first-resume-template/prev
     MatDividerModule,
     MatGridListModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
