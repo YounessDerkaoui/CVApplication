@@ -1,13 +1,13 @@
-<!--Authentification screen-->
+<!--Authentication screen-->
 <div class="general" *ngIf="!forgottenPassword && !passwordReset">
 
     <div class="image-container">
         <img src="assets/images/logo-berexia.png">
     </div>
 
-    <mat-card class="card"> 
+    <mat-card class="card">
         <mat-card-content class="card-content">
-             <mat-icon style="color: #008cff; padding-right:10px;">insert_drive_file</mat-icon> 
+             <mat-icon style="color: #008cff; padding-right:10px;">insert_drive_file</mat-icon>
              CV Database
         </mat-card-content>
     </mat-card>
@@ -15,7 +15,7 @@
     <div class="example-container">
         <mat-form-field>
             <mat-label>Nom d'utilisateur</mat-label>
-            <input matInput autocomplete="off">
+            <input matInput autocomplete="off" [(ngModel)]="username">
             <mat-icon matSuffix style="color: #008cff;">person</mat-icon>
         </mat-form-field>
     </div>
@@ -23,15 +23,15 @@
     <div class="example-container">
         <mat-form-field>
             <mat-label>Mot de passe</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" autocomplete="new-password">
+            <input matInput [(ngModel)]="password" [type]="hide ? 'password' : 'text'" autocomplete="new-password">
             <mat-icon matSuffix style="color: #008cff;">key</mat-icon>
         </mat-form-field>
     </div>
 
     <button mat-fab extended
-    (click)="goToHome()">Se connecter</button>
+    (click)="authenticate()">Se connecter</button>
 
-    <a mat-flat-button routerLink="." 
+    <a mat-flat-button routerLink="."
     style="background-color: transparent; color: black; text-decoration: underline;"
     (click)="switchDiv()">
         Mot de passe oublié ?
@@ -52,9 +52,9 @@
         <img src="assets/images/logo-berexia.png">
     </div>
 
-    <mat-card class="card"> 
+    <mat-card class="card">
         <mat-card-content class="card-content">
-             <mat-icon style="color: #008cff; padding-right:10px;">warning</mat-icon> 
+             <mat-icon style="color: #008cff; padding-right:10px;">warning</mat-icon>
              Saisir un nouveau mot de passe
         </mat-card-content>
     </mat-card>
@@ -79,7 +79,7 @@
     (click)="resetPassword()">
     Réinitialiser</button>
 
-    <a mat-flat-button routerLink="." 
+    <a mat-flat-button routerLink="."
     style="background-color: transparent; color: black; text-decoration: underline;"
     (click)="switchDiv()">
         Annuler
@@ -98,9 +98,9 @@
         <img src="assets/images/logo-berexia.png">
     </div>
 
-    <mat-card class="card"> 
+    <mat-card class="card">
         <mat-card-content class="card-content">
-             <mat-icon style="color: #008cff; padding-right:10px;">input</mat-icon> 
+             <mat-icon style="color: #008cff; padding-right:10px;">input</mat-icon>
              Saisir votre E-mail BEREXIA
         </mat-card-content>
     </mat-card>

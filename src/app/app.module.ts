@@ -47,7 +47,10 @@ import { CapitalizeAllWordsPipe } from './pipes/capitalize-all-words.pipe';
 import {MatSelectModule} from "@angular/material/select";
 import { EmptyStringToDashPipe } from './pipes/empty-string-to-dash.pipe';
 import { LanguageInfoViewComponent } from './internes/first-resume-template/preview/language-info-view/language-info-view.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { SideNavComponent } from './side-nav/side-nav.component';
+import {AuthInterceptorService} from "./services/auth-interceptor.service";
 
 @NgModule({
   declarations: [
@@ -78,6 +81,8 @@ import {HttpClientModule} from "@angular/common/http";
     CapitalizeAllWordsPipe,
     EmptyStringToDashPipe,
     LanguageInfoViewComponent,
+    NavBarComponent,
+    SideNavComponent,
   ],
   imports: [
     BrowserModule,
@@ -102,7 +107,7 @@ import {HttpClientModule} from "@angular/common/http";
     MatSelectModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
