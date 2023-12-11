@@ -1,31 +1,19 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import {AuthService} from "../services/auth.service";
+import {Router} from "@angular/router";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
-  selector: 'app-authentification',
-  templateUrl: './authentification.component.html',
-  styleUrls: ['./authentification.component.scss']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
-export class AuthentificationComponent {
+export class LoginComponent {
 
   hide = true;
-  forgottenPassword = false;
-  passwordReset = false;
   username:string = '';
   password:string = '';
 
   constructor(private router:Router,private authService:AuthService) { }
-
-  switchDiv()
-  {
-    this.forgottenPassword = !this.forgottenPassword
-  }
-
-  resetPassword()
-  {
-    this.passwordReset = true;
-  }
 
   authenticate() {
     const username = this.username

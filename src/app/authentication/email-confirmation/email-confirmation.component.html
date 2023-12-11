@@ -1,0 +1,28 @@
+<div class="general">
+
+  <div class="image-container">
+    <img src="assets/images/logo-berexia.png">
+  </div>
+
+  <mat-card class="card">
+    <mat-card-content class="card-content">
+      <mat-icon style="color: #008cff; padding-right:10px;">input</mat-icon>
+      Saisir votre E-mail BEREXIA
+    </mat-card-content>
+  </mat-card>
+
+  <div class="example-container">
+    <mat-form-field>
+      <mat-label>Adresse mail</mat-label>
+      <input matInput autocomplete="off" [(ngModel)]="email">
+      <mat-icon matSuffix style="color: #008cff;">email</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <button mat-fab extended (click)="sendMail()">Envoyer</button>
+
+  <div class="image-container image-footer">
+    <img src="assets/images/footer-image.png">
+  </div>
+
+</div>

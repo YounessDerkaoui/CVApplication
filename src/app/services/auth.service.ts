@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {Router} from "@angular/router";
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {BehaviorSubject, catchError, map, mergeMap, Observable, throwError} from "rxjs";
 import {environment} from "../../environments/environment";
@@ -8,6 +7,9 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 const LOGIN_API = environment.baseUrl + '/auth/login';
 const INFO_API = environment.baseUrl + '/auth/info';
 const REFRESH_API = environment.baseUrl + '/auth/refresh';
+const RESET_PASSWORD_API = environment.baseUrl + '/auth/reset-password';
+const VERIFY_RESET_CODE_API = environment.baseUrl + '/auth/verify-reset-code';
+const CHANGE_PASSWORD_API = environment.baseUrl + '/auth/change-password';
 
 class LoginResponse {
   accessToken?: string;
@@ -21,7 +23,12 @@ class RefreshResponse {
 class UserInfo {
   username?: string;
   enabled?: boolean;
-  isAdmin?: boolean;
+  roles?: Role[];
+}
+
+class Role {
+  id?: string;
+  name?: string;
 }
 
 @Injectable({
@@ -65,7 +72,10 @@ export class AuthService {
             map(userInfo => {
               localStorage.setItem('username', <string>userInfo.username);
               localStorage.setItem('enabled', String(userInfo.enabled));
-              localStorage.setItem('isAdmin', String(userInfo.isAdmin));
+              const rolesString = userInfo.roles?.map(role => role.name).join(',');
+              if (typeof rolesString === "string") {
+                localStorage.setItem('roles', rolesString);
+              }
               this.authStatus.next(true);
             })
           );
@@ -113,14 +123,16 @@ export class AuthService {
       !this.jwt.isTokenExpired(localStorage.getItem('refreshToken'));
   }
 
-  // User is an administrator
-  isAdmin(): boolean {
-    return localStorage.getItem('isAdmin') === 'true';
+  resetPassword(email: string) {
+    return this.http.post<LoginResponse>(RESET_PASSWORD_API, {email});
   }
 
-  // get username
-  getUsername(): string | null {
-    return localStorage.getItem('username');
+  verifyResetCode(email: string, reset_code: string) {
+    return this.http.post<LoginResponse>(VERIFY_RESET_CODE_API, {email, reset_code});
+  }
+
+  changePassword(email: string, newPassword: string, confirmNewPassword: string, resetCode: string) {
+    return this.http.post<LoginResponse>(CHANGE_PASSWORD_API, {email, newPassword, confirmNewPassword, resetCode});
   }
 
 }

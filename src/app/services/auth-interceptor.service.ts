@@ -12,7 +12,11 @@ export class AuthInterceptorService implements HttpInterceptor{
   constructor(private authService: AuthService,private router: Router) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (!/.*\/api\/auth\/.*/.test(req.url)) {
+    if (!/.*\/api\/auth\/.*/.test(req.url)
+      && !/.*\/login.*/.test(req.url)
+      && !/.*\/reset-password.*/.test(req.url)
+      && !/.*\/verify-reset-code.*/.test(req.url)
+      && !/.*\/change-password.*/.test(req.url)) {
       return this.authService.getAccessToken().pipe(
         mergeMap((accessToken: string) => {
           const reqAuth = req.clone({ setHeaders: { Authorization: `Bearer ${accessToken}` } });

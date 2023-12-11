@@ -1,0 +1,42 @@
+<div class="general">
+
+  <div class="image-container">
+    <img src="assets/images/logo-berexia.png">
+  </div>
+
+  <mat-card class="card">
+    <mat-card-content class="card-content">
+      <mat-icon style="color: #008cff; padding-right:10px;">insert_drive_file</mat-icon>
+      CV Database
+    </mat-card-content>
+  </mat-card>
+
+  <div class="example-container">
+    <mat-form-field>
+      <mat-label>Nom d'utilisateur</mat-label>
+      <input matInput autocomplete="off" [(ngModel)]="username">
+      <mat-icon matSuffix style="color: #008cff;">person</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div class="example-container">
+    <mat-form-field>
+      <mat-label>Mot de passe</mat-label>
+      <input matInput [(ngModel)]="password" [type]="hide ? 'password' : 'text'" autocomplete="new-password">
+      <mat-icon matSuffix style="color: #008cff;">key</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <button mat-fab extended
+          (click)="authenticate()">Se connecter</button>
+
+  <a mat-flat-button routerLink="/email-confirmation"
+     style="background-color: transparent; color: black; text-decoration: underline;">
+    Mot de passe oublié ?
+  </a>
+
+  <div class="image-container image-footer">
+    <img src="assets/images/footer-image.png" >
+  </div>
+
+</div>

@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthentificationComponent } from './authentification/authentification.component';
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import { MatCardModule } from '@angular/material/card'
@@ -51,11 +50,14 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import {AuthInterceptorService} from "./services/auth-interceptor.service";
+import { EmailConfirmationComponent } from './authentication/email-confirmation/email-confirmation.component';
+import { PasswordResetComponent } from './authentication/password-reset/password-reset.component';
+import {LoginComponent} from "./authentication/login/login.component";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthentificationComponent,
     SidenavComponent,
     BodyComponent,
     DashboardComponent,
@@ -83,6 +85,9 @@ import {AuthInterceptorService} from "./services/auth-interceptor.service";
     LanguageInfoViewComponent,
     NavBarComponent,
     SideNavComponent,
+    LoginComponent,
+    EmailConfirmationComponent,
+    PasswordResetComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,7 +110,8 @@ import {AuthInterceptorService} from "./services/auth-interceptor.service";
     MatGridListModule,
     ReactiveFormsModule,
     MatSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSnackBarModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent]

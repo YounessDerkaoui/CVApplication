@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthentificationComponent } from './authentification/authentification.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { InternesComponent } from './internes/internes.component';
@@ -8,6 +7,10 @@ import { ExternesComponent } from './externes/externes.component';
 import { SettingsComponent } from './settings/settings.component';
 import {FirstResumeTemplateComponent} from "./internes/first-resume-template/first-resume-template.component";
 import {authGuard} from "./services/guards/auth.guard";
+import {LoginComponent} from "./authentication/login/login.component";
+import {EmailConfirmationComponent} from "./authentication/email-confirmation/email-confirmation.component";
+import {PasswordResetComponent} from "./authentication/password-reset/password-reset.component";
+import {passwordResetGuard} from "./services/guards/password-reset.guard";
 
 
 const routes: Routes = [
@@ -29,7 +32,9 @@ const routes: Routes = [
       {path: 'settings', component: SettingsComponent},
     ]
   },
-  {path: 'login', component: AuthentificationComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'email-confirmation', component: EmailConfirmationComponent},
+  {path: 'password-reset', component: PasswordResetComponent, canActivate: [passwordResetGuard]},
   {path: '**', redirectTo: '', pathMatch: 'full'},
 ];
 

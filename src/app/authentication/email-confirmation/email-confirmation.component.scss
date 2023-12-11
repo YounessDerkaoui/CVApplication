@@ -1,0 +1,61 @@
+.general {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center;
+  overflow: auto;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2vh;
+}
+
+.image-footer {
+  bottom : 0;
+}
+
+.card-content {
+  font-family: 'Oswald';
+  font-weight: 550;
+  font-size: 23px;
+  color: #008cff;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  align-self: center;
+}
+
+.card {
+  width: 43vh;
+  background-color: transparent;
+  border: 1px solid #008cff;
+  margin: 30px;
+}
+
+button {
+  width: 43vh;
+  background-color: #008cff;
+  color: white;
+  font-weight: bold;
+  margin: 10px;
+}
+
+.example-container mat-form-field {
+  width: 43vh;
+}
+
+@font-face {
+  font-family: 'Oswald';
+  src: url('../../../assets/fonts/Oswald-Medium.ttf');
+}
+
+div{
+  background-color: #e7f3ff;
+}
+/* YourComponent.styles.css */
+.your-custom-class {
+  background-color: #4caf50; /* Green background color */
+  color: white; /* White text color */
+}
