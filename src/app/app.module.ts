@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -9,8 +8,6 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatCardModule } from '@angular/material/card'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input';
-import { SidenavComponent } from './sidenav/sidenav.component';
-import { BodyComponent } from './body/body.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { InternesComponent } from './internes/internes.component';
@@ -49,17 +46,16 @@ import { LanguageInfoViewComponent } from './internes/first-resume-template/prev
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
-import {AuthInterceptorService} from "./services/auth-interceptor.service";
+import {AuthInterceptorService} from "./services/interceptors/auth-interceptor.service";
 import { EmailConfirmationComponent } from './authentication/email-confirmation/email-confirmation.component';
 import { PasswordResetComponent } from './authentication/password-reset/password-reset.component';
 import {LoginComponent} from "./authentication/login/login.component";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    SidenavComponent,
-    BodyComponent,
     DashboardComponent,
     HomeComponent,
     InternesComponent,
@@ -111,7 +107,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     ReactiveFormsModule,
     MatSelectModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent]

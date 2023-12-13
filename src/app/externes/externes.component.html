@@ -1,18 +1,20 @@
 <div class="outter">
     <!--------------------------------Tableau des CVs------------------------------->
     <div class="files">
-        
+
         <div class="input-container">
             <mat-form-field appearance="outline" style="margin-top: 20px;">
                 <input matInput (keyup)="applyFilter($event)" placeholder="Chercher par mot clé" autocomplete="off" #input>
             </mat-form-field>
-            
-            <button mat-fab extended color="primary">Télécharger</button>
-        </div>
 
-        <div class="mat-z8">
+            <button mat-fab extended color="primary" (click)="downloadList()">Télécharger</button>
+        </div>
+      <div *ngIf="rowCount == 0" class="alert alert-danger" style="margin: 10px;text-align: center" role="alert">
+        There are no extern resumes to display
+      </div>
+        <div class="mat-z8" *ngIf="rowCount > 0">
             <table mat-table [dataSource]="dataSource" matSort>
-            
+
                 <!-- Check Column -->
                 <ng-container matColumnDef="isSelected">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="checkbox-width">
@@ -22,38 +24,38 @@
                     <mat-checkbox [(ngModel)]="row.isSelected"></mat-checkbox>
                     </td>
                 </ng-container>
-            
+
                 <!-- Document Column -->
                 <ng-container matColumnDef="documentName">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Document </th>
                 <td mat-cell *matCellDef="let row"> {{row.documentName}} </td>
                 </ng-container>
-            
+
                 <!-- Preview Column -->
                 <ng-container matColumnDef="show">
-                <th mat-header-cell *matHeaderCellDef> Afficher le CV </th>
-                <td mat-cell *matCellDef="let row"> 
-                    <mat-icon matSuffix class="clickable">visibility</mat-icon>
+                <th mat-header-cell *matHeaderCellDef> Ajouter Le </th>
+                <td mat-cell *matCellDef="let row">
+                    {{row.createdAt}}
                 </td>
                 </ng-container>
-            
+
                 <!-- Download Column -->
                 <ng-container matColumnDef="download">
                 <th mat-header-cell *matHeaderCellDef> Télécharger le CV </th>
                 <td mat-cell *matCellDef="let row">
-                    <mat-icon matSuffix class="clickable">download</mat-icon>
+                    <mat-icon matSuffix class="clickable" (click)="downloadResume(row)">download</mat-icon>
                 </td>
                 </ng-container>
-            
+
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            
+
                 <!-- Row shown when there is no matching data. -->
                 <tr class="mat-row" *matNoDataRow>
                     <td class="mat-cell" colspan="4">Aucun résultat pour "{{input.value}}"</td>
                 </tr>
             </table>
-            
+
             <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page"></mat-paginator>
         </div>
     </div>

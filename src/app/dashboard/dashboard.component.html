@@ -3,10 +3,10 @@
 
         <mat-card class="top-card">
             <div class="horizontal-div">
-                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="file_copy"></mat-icon>
                 <mat-card-title>Totale CV</mat-card-title>
             </div>
-            <mat-card-title>30</mat-card-title>
+            <mat-card-title style="text-align: center">{{totalResumesCount}}</mat-card-title>
         </mat-card>
 
         <mat-card class="top-card">
@@ -14,7 +14,7 @@
                 <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home" class="icon"></mat-icon>
                 <mat-card-title>CV Internes</mat-card-title>
             </div>
-            <mat-card-title>20</mat-card-title>
+            <mat-card-title>{{internResumesCount}}</mat-card-title>
         </mat-card>
 
         <mat-card class="top-card">
@@ -22,7 +22,7 @@
                 <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
                 <mat-card-title>CV Externes</mat-card-title>
             </div>
-            <mat-card-title>10</mat-card-title>
+            <mat-card-title>{{externResumesCount}}</mat-card-title>
         </mat-card>
 
     </div>
@@ -34,7 +34,7 @@
                 <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
                 <mat-card-title>Profils modifiés récemment</mat-card-title>
             </div>
-            <mat-card-title>30</mat-card-title>
+            <mat-card-title>{{lastModifiedResumesCount}}</mat-card-title>
         </mat-card>
 
         <mat-card class="bottom-card">
@@ -42,7 +42,7 @@
                 <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home" class="icon"></mat-icon>
                 <mat-card-title>Profils Internes</mat-card-title>
             </div>
-            <mat-card-title>20</mat-card-title>
+            <mat-card-title>{{internProfilesCount}}</mat-card-title>
         </mat-card>
 
     </div>
