@@ -1,38 +1,63 @@
 <div class="general">
+
     <mat-form-field>
         <mat-label>Nom d'utilisateur</mat-label>
-        <input matInput autocomplete="off" [readonly]="isInputReadonly">
+        <input matInput autocomplete="off" [(ngModel)]="username" [readonly]="isUsernameReadonly">
         <mat-icon matSuffix class="clickable" color="primary"
-        (click)="toggleInput()">
+                  (click)="toggleInput('username')">
         change_circle
         </mat-icon>
     </mat-form-field>
 
-    <mat-form-field>
-        <mat-label>Adresse mail</mat-label>
-        <input matInput autocomplete="off" readonly>
-    </mat-form-field>
+  <div *ngIf="usernameError" class="error-message alert alert-danger">
+    Le nom d'utilisateur existe déjà. Veuillez en choisir un autre.
+  </div>
 
     <mat-form-field>
-        <mat-label>Poste Occupé</mat-label>
-        <input matInput autocomplete="off" readonly>
+      <mat-label>Adresse mail</mat-label>
+      <input matInput autocomplete="off" [(ngModel)]="email" [readonly]="isEmailReadonly">
+      <mat-icon matSuffix class="clickable" color="primary"
+                (click)="toggleInput('email')">
+        change_circle
+      </mat-icon>
     </mat-form-field>
 
-    <mat-divider></mat-divider>
+  <div *ngIf="emailError" class="error-message alert alert-danger">
+    L'adresse e-mail existe déjà. Veuillez en choisir une autre.
+  </div>
+
+    <mat-form-field>
+      <mat-label>Poste Occupé</mat-label>
+      <input matInput autocomplete="off" [(ngModel)]="currentPosition" [readonly]="isCurrentPositionReadonly" >
+      <mat-icon matSuffix class="clickable" color="primary"
+                (click)="toggleInput('currentPosition')">
+        change_circle
+      </mat-icon>
+    </mat-form-field>
+
+    <mat-divider style="margin-top: 40px;margin-bottom: 40px;"></mat-divider>
 
     <mat-form-field>
         <mat-label>Mot de passe actuel</mat-label>
-        <input matInput autocomplete="off" readonly>
-        <mat-icon matSuffix color="primary">key</mat-icon>
+        <input matInput [type]="hideOldPassword ? 'password' : 'text'" [(ngModel)]="oldPassword"  autocomplete="off">
+        <mat-icon matSuffix color="primary"
+                  (click)="toggleInput('oldPassword')">remove_red_eye</mat-icon>
     </mat-form-field>
 
+  <div *ngIf="passwordError" class="error-message alert alert-danger">
+    Le mot de passe actuel est incorrect. Veuillez réessayer.
+  </div>
+
     <mat-form-field>
-        <mat-label>Nouveau mot de passe</mat-label>
-        <input matInput autocomplete="off">
+      <mat-label>Nouveau mot de passe</mat-label>
+      <input matInput [type]="hideNewPassword ? 'password' : 'text'" [(ngModel)]="newPassword"  autocomplete="new-password">
+      <mat-icon matSuffix color="primary"
+                (click)="toggleInput('newPassword')">remove_red_eye</mat-icon>
     </mat-form-field>
 
     <div>
-        <button mat-flat-button extended color="primary" class="right-button">Modifier le mot de passe</button>
+        <button mat-flat-button extended color="primary" class="right-button"
+        [disabled]="!isFormModified()" (click)="changeData()">Modifier</button>
     </div>
 
 </div>

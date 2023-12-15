@@ -24,8 +24,6 @@ export class AuthInterceptorService implements HttpInterceptor{
           return next.handle(reqAuth);
         }),
         catchError((err) => {
-          console.error(err);
-          this.router.navigate(['/login']);
           return throwError(err);
         })
       );

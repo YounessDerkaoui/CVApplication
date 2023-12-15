@@ -24,7 +24,7 @@ export const navbarData = [
     },
 
     {
-        routeLink: '',
+        routeLink: 'logout',
         icon: 'fal fa-sign-out ',
         label: 'Se déconnecter'
     }

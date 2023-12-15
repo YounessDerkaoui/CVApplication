@@ -3,6 +3,7 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {BehaviorSubject, catchError, map, mergeMap, Observable, throwError} from "rxjs";
 import {environment} from "../../environments/environment";
 import { JwtHelperService } from '@auth0/angular-jwt';
+import {Router} from "@angular/router";
 
 const LOGIN_API = environment.baseUrl + '/auth/login';
 const INFO_API = environment.baseUrl + '/auth/info';
@@ -21,7 +22,10 @@ class RefreshResponse {
 }
 
 class UserInfo {
+  id?: string;
   username?: string;
+  currentPosition?: string;
+  email?: string;
   enabled?: boolean;
   roles?: Role[];
 }
@@ -40,7 +44,7 @@ export class AuthService {
   private authStatus: BehaviorSubject<boolean> = new BehaviorSubject(this.isAuthenticated());
 
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private route: Router) { }
 
   private errorHandler(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -70,7 +74,10 @@ export class AuthService {
           };
           return this.http.get<UserInfo>(INFO_API, opts).pipe(
             map(userInfo => {
+              localStorage.setItem('id', <string>userInfo.id);
               localStorage.setItem('username', <string>userInfo.username);
+              localStorage.setItem('email', <string>userInfo.email);
+              localStorage.setItem('currentPosition', <string>userInfo.currentPosition);
               localStorage.setItem('enabled', String(userInfo.enabled));
               const rolesString = userInfo.roles?.map(role => role.name).join(',');
               if (typeof rolesString === "string") {
@@ -87,6 +94,7 @@ export class AuthService {
   deauthenticate() {
     localStorage.clear();
     this.authStatus.next(false);
+    this.route.navigate(['/login']);
   }
 
   // Get access token, automatically refresh if necessary

@@ -1,9 +1,29 @@
 <div class="body top-nav" [ngClass]="getBodyClass()"
      style="height: 8.5rem;">
   <h1 style="font-size: xx-large;">{{activeRouteLabel}}</h1>
-  <div class="right-items">
+<!--  <div class="right-items">
     <mat-icon matBadge="4"  matBadgeSize="small" color="primary" matBadgeColor="accent"
               (click)="openDialog('100ms', '100ms')" class="clickable icon-display">notifications</mat-icon>
     <span class="cdk-visually-hidden">Notifications</span>
+  </div>-->
+
+  <div class="container">
+    <img src='https://www.himalmag.com/wp-content/uploads/2019/07/sample-profile-picture.png'
+         width="90" height="90" class="hy-profile-image" />
+    <div (click)="toggleMenu()">
+      <span class="username">{{username}}</span>
+      <mat-icon aria-hidden="false" *ngIf="!isMenuOpen" aria-label="Example home icon" fontIcon="keyboard_arrow_down"
+                class="icon"></mat-icon>
+      <mat-icon aria-hidden="false" *ngIf="isMenuOpen" aria-label="Example home icon" fontIcon="keyboard_arrow_up"
+                class="icon"></mat-icon>
+    </div>
+    <div class="menu-list" *ngIf="isMenuOpen">
+      <div class="menu-item">
+        <p>Mon compte</p>
+      </div>
+    </div>
   </div>
+
+
+
 </div>

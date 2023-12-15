@@ -1,17 +1,29 @@
 import {Component, Input, ViewEncapsulation} from '@angular/core';
 import {ActiveRouteService} from "../services/active-route.service";
 import {MatDialog, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
+import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.scss']
+  styleUrls: ['./nav-bar.component.scss'],
+  animations: [
+    trigger('toggleMenu', [
+      state('visible', style({ opacity: 1 })),
+      state('hidden', style({ opacity: 0 })),
+      transition('visible => hidden', animate('300ms ease-out')),
+      transition('hidden => visible', animate('300ms ease-in')),
+    ]),
+  ],
 })
 export class NavBarComponent {
 
   @Input() collapsed = false;
   @Input() screenWidth = 0;
   activeRouteLabel: string = '';
+  username: string = localStorage.getItem("username")!
+  isMenuOpen: boolean = false;
+
 
   constructor(private activeRouteService: ActiveRouteService, public dialog: MatDialog) {}
 
@@ -53,6 +65,10 @@ export class NavBarComponent {
       styleClass = 'body-md-screen'
     }
     return styleClass;
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
   }
 }
 

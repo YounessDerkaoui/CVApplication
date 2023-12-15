@@ -8,7 +8,7 @@
   </div>
   <br><br>
   <ul class="sidenav-nav">
-    <li class="sidenav-nav-item" *ngFor="let data of navData" (click)="returnRoute()">
+    <li class="sidenav-nav-item" *ngFor="let data of navData" (click)="returnRoute(data.label)">
       <a class="sidenav-nav-link" [routerLink]="[data.routeLink]"
          routerLinkActive="active"
          [routerLinkActiveOptions]="{exact: true}">

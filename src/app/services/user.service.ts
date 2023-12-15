@@ -10,6 +10,7 @@ const TOTAL_RESUMES_COUNT_API = environment.baseUrl + '/users/count?type=all';
 const INTERN_PROFILES_COUNT_API = environment.baseUrl + '/users/count?type=intern_profiles';
 const LAST_MODIFIED_RESUMES_COUNT_API = environment.baseUrl + '/users/count?type=modified';
 const EXTERN_USERS_API = environment.baseUrl + '/users?type=extern';
+const UPDATE_USER_API = environment.baseUrl + '/users';
 
 
 @Injectable({
@@ -57,6 +58,26 @@ export class UserService {
         };
       })
     );
+  }
+
+  changeUsername(username: string){
+    const id = localStorage.getItem("id")!
+    return this.http.post<any>(UPDATE_USER_API, {id, username});
+  }
+
+  changeEmail(email: string){
+    const id = localStorage.getItem("id")!
+    return this.http.post<any>(UPDATE_USER_API, {id, email});
+  }
+
+  changeCurrentPosition(currentPosition: string){
+    const id = localStorage.getItem("id")!
+    return this.http.post<any>(UPDATE_USER_API, {id, currentPosition});
+  }
+
+  changePassword(oldPassword: string, newPassword: string){
+    const id = localStorage.getItem("id")!
+    return this.http.post<any>(UPDATE_USER_API, {id, oldPassword,newPassword});
   }
 
   getExternalUsers(){

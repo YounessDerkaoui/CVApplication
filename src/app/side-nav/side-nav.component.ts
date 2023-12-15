@@ -3,6 +3,7 @@ import {animate, style, transition, trigger} from "@angular/animations";
 import {ActivatedRoute} from "@angular/router";
 import {ActiveRouteService} from "../services/active-route.service";
 import {navbarData} from "./nav-data";
+import {AuthService} from "../services/auth.service";
 
 
 interface SideNavToggle {
@@ -40,7 +41,9 @@ export class SideNavComponent implements OnInit{
     this.screenWidth = window.innerWidth;
   }
 
-  constructor (private route: ActivatedRoute, private activeRouteService: ActiveRouteService) {
+  constructor (private route: ActivatedRoute,
+               private activeRouteService: ActiveRouteService,
+               private authService: AuthService) {
   }
 
   toggleCollapse(): void {
@@ -57,20 +60,24 @@ export class SideNavComponent implements OnInit{
     }
   }
 
-  returnRoute() {
-    this.route.url.subscribe(urlSegments => {
-      const childRoute = this.route.firstChild;
-      let activeChild = childRoute?.snapshot.url.join('/');
-      const menuItem = navbarData.find(item => item.routeLink === activeChild);
-      console.log('Active Child Route:', menuItem?.label);
-      if (menuItem) {
-        this.activeRouteLabel = menuItem.label;
-        this.activeRouteService.setActiveRouteLabel(menuItem.label);
-      }
-      else
-      {
-        this.activeRouteService.setActiveRouteLabel('');
-      }
-    });
+  returnRoute(label: string) {
+    if (label == "Se déconnecter") {
+      this.authService.deauthenticate();
+    } else {
+      this.route.url.subscribe(urlSegments => {
+        const childRoute = this.route.firstChild;
+        let activeChild = childRoute?.snapshot.url.join('/');
+        const menuItem = navbarData.find(item => item.routeLink === activeChild);
+        console.log('Active Child Route:', menuItem?.label);
+        if (menuItem) {
+          this.activeRouteLabel = menuItem.label;
+          this.activeRouteService.setActiveRouteLabel(menuItem.label);
+        }
+        else
+        {
+          this.activeRouteService.setActiveRouteLabel('');
+        }
+      });
+    }
   }
 }

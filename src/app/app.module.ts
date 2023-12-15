@@ -53,6 +53,7 @@ import {LoginComponent} from "./authentication/login/login.component";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -83,7 +84,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     SideNavComponent,
     LoginComponent,
     EmailConfirmationComponent,
-    PasswordResetComponent,
+    PasswordResetComponent
   ],
   imports: [
     BrowserModule,
@@ -107,8 +108,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     ReactiveFormsModule,
     MatSelectModule,
     HttpClientModule,
-    MatSnackBarModule,
-
+    MatSnackBarModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent]
