@@ -30,13 +30,13 @@ export class NavBarComponent {
   ngOnInit() {
     this.activeRouteService.activeRouteLabel$.subscribe(label => {
       if (label === "Tableau de bord") {
-        this.activeRouteLabel = "Bonjour " + localStorage.getItem("username")!
+        this.activeRouteLabel = "Tableau de bord"
       }else if (label) {
         this.activeRouteLabel = label;
       } else if (label === '') {
         const currentURL = window.location.href;
         if (currentURL.includes("dashboard")) {
-          this.activeRouteLabel = "Bonjour " + localStorage.getItem("username")!
+          this.activeRouteLabel = "Tableau de bord"
         } else if (currentURL.includes("internes")) {
           this.activeRouteLabel = 'CV Internes'
         } else if (currentURL.includes("externes")) {

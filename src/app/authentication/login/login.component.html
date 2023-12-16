@@ -5,16 +5,20 @@
   </div>
 
   <mat-card class="card">
-    <mat-card-content class="card-content">
+    <mat-card-content  (click)="openLinkInNewTab()" class="card-content" >
       <mat-icon style="color: #008cff; padding-right:10px;">insert_drive_file</mat-icon>
       CV Database
     </mat-card-content>
   </mat-card>
 
+  <div *ngIf="error" class="error-message alert alert-danger">
+    Nom d'utilisateur ou mot de passe incorrect.
+  </div>
+
   <div class="example-container">
     <mat-form-field>
       <mat-label>Nom d'utilisateur</mat-label>
-      <input matInput autocomplete="off" [(ngModel)]="username">
+      <input matInput autocomplete="off" (input)="onInputChange()" [(ngModel)]="username">
       <mat-icon matSuffix style="color: #008cff;">person</mat-icon>
     </mat-form-field>
   </div>
@@ -22,8 +26,8 @@
   <div class="example-container">
     <mat-form-field>
       <mat-label>Mot de passe</mat-label>
-      <input matInput [(ngModel)]="password" [type]="hide ? 'password' : 'text'" autocomplete="new-password">
-      <mat-icon matSuffix style="color: #008cff;">key</mat-icon>
+      <input matInput [(ngModel)]="password" (input)="onInputChange()"  [type]="hide ? 'password' : 'text'" autocomplete="new-password">
+      <mat-icon matSuffix  (click)="toggleInput()" style="color: #008cff;">remove_red_eye</mat-icon>
     </mat-form-field>
   </div>
 

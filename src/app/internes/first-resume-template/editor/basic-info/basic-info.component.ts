@@ -12,5 +12,17 @@ export class BasicInfoComponent {
 
   constructor() {
   }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      this.basicInfo.picture = reader.result as string
+      console.log(this.basicInfo.picture)
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
 }
 

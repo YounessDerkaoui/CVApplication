@@ -51,6 +51,7 @@ import { EmailConfirmationComponent } from './authentication/email-confirmation/
 import { PasswordResetComponent } from './authentication/password-reset/password-reset.component';
 import {LoginComponent} from "./authentication/login/login.component";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -84,7 +85,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     SideNavComponent,
     LoginComponent,
     EmailConfirmationComponent,
-    PasswordResetComponent
+    PasswordResetComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -15,6 +15,13 @@ export class FirstResumeTemplateComponent implements OnInit{
       lastName: '',
       occupation: '',
       yearsOfExp: 0,
+      picture: '',
+    },
+    contactInfo: {
+      email: '',
+      linkedin: '',
+      github: '',
+      address: '',
     },
     skillsInfo: [],
     educationInfo: [],
@@ -26,7 +33,7 @@ export class FirstResumeTemplateComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.userService.getUserDetails(1).subscribe({
+    this.userService.getUserDetails("1").subscribe({
       next: (data)=>{
         this.formData = data;
         console.log(data)

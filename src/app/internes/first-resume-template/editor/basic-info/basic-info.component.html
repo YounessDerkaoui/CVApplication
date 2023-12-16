@@ -37,5 +37,17 @@
         [(ngModel)]="basicInfo.yearsOfExp"
       />
     </label>
+    <label class="form-label">
+      <span class="form-label__title">Image de profil :</span>
+      <input
+        type="file"
+        name="profileImage"
+        class="form-input form-input__profile-image"
+        (change)="onFileSelected($event)"
+      />
+    </label>
+    <div *ngIf="basicInfo.picture">
+      <img [src]="basicInfo.picture" width="90" height="90" style="border-radius: 50%"/>
+    </div>
   </fieldset>
 </form>

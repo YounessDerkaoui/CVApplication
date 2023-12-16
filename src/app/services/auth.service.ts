@@ -24,7 +24,6 @@ class RefreshResponse {
 class UserInfo {
   id?: string;
   username?: string;
-  currentPosition?: string;
   email?: string;
   enabled?: boolean;
   roles?: Role[];
@@ -77,7 +76,6 @@ export class AuthService {
               localStorage.setItem('id', <string>userInfo.id);
               localStorage.setItem('username', <string>userInfo.username);
               localStorage.setItem('email', <string>userInfo.email);
-              localStorage.setItem('currentPosition', <string>userInfo.currentPosition);
               localStorage.setItem('enabled', String(userInfo.enabled));
               const rolesString = userInfo.roles?.map(role => role.name).join(',');
               if (typeof rolesString === "string") {

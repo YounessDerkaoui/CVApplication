@@ -11,6 +11,7 @@ import {UserService} from "../../../services/user.service";
 export class EditorComponent{
 
   @Input() formData!: IFormData;
+  @Input() enableOverflowY: boolean = true;
 
   constructor(private userService: UserService) {
   }

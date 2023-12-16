@@ -13,7 +13,10 @@
         margin-top: 1.7rem;
     }
 }
-
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+}
 .files::-webkit-scrollbar {
     width: 12px;
 }

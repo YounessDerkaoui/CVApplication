@@ -12,6 +12,7 @@ export class LoginComponent {
   hide = true;
   username:string = '';
   password:string = '';
+  error: boolean = false;
 
   constructor(private router:Router,private authService:AuthService) { }
 
@@ -21,11 +22,26 @@ export class LoginComponent {
     console.log(this.username,this.password)
     this.authService.authenticate(username, password).subscribe(
       () => {
+        this.error = false;
         this.router.navigate(['/']);
       },
       (error) => {
         console.log(error)
+        this.error = true;
       }
     );
+  }
+
+  openLinkInNewTab(): void {
+    const url = 'http://localhost/phpmyadmin/index.php?route=/database/structure&db=resume_app';
+    window.open(url, '_blank');
+  }
+
+  toggleInput() {
+    this.hide = !this.hide;
+  }
+
+  onInputChange() {
+    this.error = false;
   }
 }

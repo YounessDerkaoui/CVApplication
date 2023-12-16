@@ -1,5 +1,6 @@
 export interface IFormData {
   basicInfo: IBasicInfo;
+  contactInfo: IContactInfo;
   skillsInfo: ISkillsInfo[];
   educationInfo: IEducationInfo[];
   experienceInfo: IExperienceInfo[];
@@ -10,7 +11,15 @@ export interface IBasicInfo {
   firstName: string;
   lastName: string;
   occupation: string;
-  yearsOfExp: number
+  yearsOfExp: number;
+  picture: string;
+}
+
+export interface IContactInfo {
+  email: string;
+  linkedin: string;
+  github: string;
+  address: string;
 }
 
 export interface ISkillsInfo {

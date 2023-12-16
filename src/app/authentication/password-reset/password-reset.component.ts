@@ -9,9 +9,11 @@ import {AuthService} from "../../services/auth.service";
 })
 export class PasswordResetComponent {
 
-  hide = true;
+  hidePassword = true;
+  hideConfirmPassword = true;
   newPassword:string = '';
   confirmNewPassword:string = '';
+  error: boolean = false;
 
   constructor(private router:Router,private authService:AuthService) { }
 
@@ -21,21 +23,34 @@ export class PasswordResetComponent {
     const resetCode = localStorage.getItem("resetCode")
     console.log(email,resetCode,this.newPassword,this.confirmNewPassword)
     if (email && resetCode) {
-      this.authService.changePassword(email, this.confirmNewPassword, this.confirmNewPassword, resetCode).subscribe(
-        () => {
+      this.authService.changePassword(email, this.newPassword, this.confirmNewPassword, resetCode).subscribe(
+        (data) => {
+          this.error = false;
           localStorage.clear()
           this.router.navigate(['/login']);
         },
         (error) => {
+          this.error = true;
           console.log(error)
         }
       );
     }
   }
 
+  onInputChange() {
+    this.error = false;
+  }
 
   cancelResetting() {
     localStorage.clear()
     this.router.navigate(['/login']);
+  }
+
+  toggleInput(label: string) {
+    if (label === "password") {
+      this.hidePassword = !this.hidePassword;
+    }else if (label == "confirmPassword") {
+      this.hideConfirmPassword = !this.hideConfirmPassword;
+    }
   }
 }

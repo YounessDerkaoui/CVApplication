@@ -11,6 +11,7 @@ import {LoginComponent} from "./authentication/login/login.component";
 import {EmailConfirmationComponent} from "./authentication/email-confirmation/email-confirmation.component";
 import {PasswordResetComponent} from "./authentication/password-reset/password-reset.component";
 import {passwordResetGuard} from "./services/guards/password-reset.guard";
+import {ProfileComponent} from "./profile/profile.component";
 
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
           },
         ]
       },
+      {path: 'profile', component: ProfileComponent},
       {path: 'externes', component: ExternesComponent},
       {path: 'settings', component: SettingsComponent},
     ]

@@ -10,7 +10,9 @@ const TOTAL_RESUMES_COUNT_API = environment.baseUrl + '/users/count?type=all';
 const INTERN_PROFILES_COUNT_API = environment.baseUrl + '/users/count?type=intern_profiles';
 const LAST_MODIFIED_RESUMES_COUNT_API = environment.baseUrl + '/users/count?type=modified';
 const EXTERN_USERS_API = environment.baseUrl + '/users?type=extern';
+const INTERN_USERS_API = environment.baseUrl + '/users?type=intern';
 const UPDATE_USER_API = environment.baseUrl + '/users';
+
 
 
 @Injectable({
@@ -65,6 +67,18 @@ export class UserService {
     return this.http.post<any>(UPDATE_USER_API, {id, username});
   }
 
+  changeProfilePicture(file: File): Observable<any>{
+    const id = localStorage.getItem("id")!
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post<any>(environment.baseUrl + "/users/" + id + "/picture", formData);
+  }
+
+  getProfilePicture(): Observable<Blob>{
+    const id = localStorage.getItem("id")!
+    return this.http.get(environment.baseUrl + "/users/" + id + "/picture", { responseType: 'blob' });
+  }
+
   changeEmail(email: string){
     const id = localStorage.getItem("id")!
     return this.http.post<any>(UPDATE_USER_API, {id, email});
@@ -84,13 +98,32 @@ export class UserService {
     return this.http.get<any>(EXTERN_USERS_API);
   }
 
-  getUserDetails(id: number): Observable<any> {
-    console.log(environment.baseUrl + "users/" + id)
-    return this.http.get(environment.baseUrl + "users/" + id);
+  getInternalUsers(){
+    return this.http.get<any>(INTERN_USERS_API);
+  }
+
+  getUserDetails(id: string): Observable<any> {
+    console.log(environment.baseUrl + "/users/" + id)
+    return this.http.get(environment.baseUrl + "/users/" + id);
+  }
+
+  getUserCurrentPosition(id: string): Observable<any> {
+    console.log(environment.baseUrl + "/users/" + id)
+    return this.http.get(environment.baseUrl + "/users/" + id + "/current-position");
+  }
+
+  setUserCurrentPosition(id: string): Observable<any> {
+    console.log(environment.baseUrl + "/users/" + id)
+    return this.http.get(environment.baseUrl + "/users/" + id + "/currentPosition");
+  }
+
+  getImage(id: string) {
+    return this.http.get(environment.baseUrl + "/get-image/" + id, { responseType: 'blob' });
   }
 
   uploadUserDetails(userDetails: IFormData): Observable<any> {
-    const url = 'http://127.0.0.1:5000/api/v1/users/1';
+    const id = localStorage.getItem("id")!;
+    const url = 'http://127.0.0.1:5000/api/v1/users/'+ id;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'

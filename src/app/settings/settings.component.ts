@@ -9,11 +9,14 @@ import {UserService} from "../services/user.service";
 })
 export class SettingsComponent implements OnInit{
 
+  selectedFile: File | null = null;
   isUsernameReadonly = true;
   isEmailReadonly = true;
   isCurrentPositionReadonly = true;
   hideOldPassword: boolean = true;
   hideNewPassword: boolean = true;
+  profilePicture: string = "";
+  oldProfilePicture: string = "";
   username: string = "";
   oldUsername: string = "";
   email: string = "";
@@ -25,6 +28,8 @@ export class SettingsComponent implements OnInit{
   usernameError: boolean = false;
   emailError: boolean = false;
   passwordError: boolean = false;
+  positions: string[] = ['Dev', 'BA', 'Manager','RH'];
+
 
   constructor(private userService: UserService) {
   }
@@ -34,8 +39,26 @@ export class SettingsComponent implements OnInit{
     this.oldUsername = localStorage.getItem("username")!
     this.email = localStorage.getItem("email")!
     this.oldEmail = localStorage.getItem("email")!
-    this.currentPosition = localStorage.getItem("currentPosition")!
-    this.oldCurrentPosition = localStorage.getItem("currentPosition")!
+    this.userService.getUserCurrentPosition(localStorage.getItem("id")!).subscribe(
+      (data) => {
+        this.currentPosition = data.currentPosition;
+        this.oldCurrentPosition = data.currentPosition;
+      },
+      (error) => {
+        this.usernameError = true;
+        console.log(error)
+      }
+    );
+    // @ts-ignore
+    this.userService.getProfilePicture().subscribe((imageBlob: Blob) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        // @ts-ignore
+        this.profilePicture = reader.result;
+        console.log(this.profilePicture)
+      };
+      reader.readAsDataURL(imageBlob);
+    });
   }
 
   toggleInput(input: string) {
@@ -59,10 +82,30 @@ export class SettingsComponent implements OnInit{
       (this.oldPassword != "" && this.newPassword != "")) {
       return true;
     }
-    return false;
+    return true;
   }
 
   changeData() {
+    if (this.selectedFile) {
+      console.log(98888)
+      this.userService.changeProfilePicture(this.selectedFile).subscribe(
+        (response) => {
+          this.userService.getProfilePicture().subscribe((imageBlob: Blob) => {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+              // @ts-ignore
+              this.profilePicture = reader.result;
+              console.log(this.profilePicture)
+            };
+            reader.readAsDataURL(imageBlob);
+          });
+        },
+        (error) => {
+          console.error(error);
+          // Handle error, e.g., show an error message
+        }
+      );
+    }
     if (this.username != this.oldUsername) {
       this.userService.changeUsername(this.username).subscribe(
         () => {
@@ -108,9 +151,19 @@ export class SettingsComponent implements OnInit{
         },
         (error) => {
           this.passwordError = true;
+          this.oldPassword = ""
+          this.newPassword = ""
           console.log(error)
         }
       );
     }
+  }
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
+  onInputChange() {
+    this.passwordError = false;
   }
 }

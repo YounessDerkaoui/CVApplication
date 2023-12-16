@@ -28,34 +28,50 @@
 
     <mat-form-field>
       <mat-label>Poste Occupé</mat-label>
-      <input matInput autocomplete="off" [(ngModel)]="currentPosition" [readonly]="isCurrentPositionReadonly" >
+      <mat-select [(ngModel)]="currentPosition" [disabled]="isCurrentPositionReadonly">
+        <mat-option *ngFor="let position of positions" [value]="position">{{ position }}</mat-option>
+      </mat-select>
       <mat-icon matSuffix class="clickable" color="primary"
                 (click)="toggleInput('currentPosition')">
         change_circle
       </mat-icon>
     </mat-form-field>
 
+  <label class="form-label">
+    <span class="form-label__title">Image de profil :</span>
+    <input
+      type="file"
+      name="profileImage"
+      class="form-input form-input__profile-image"
+      (change)="onFileSelected($event)"
+    />
+  </label>
+  <div>
+    <img [src]="profilePicture" width="90" height="90" style="border-radius: 50%"/>
+  </div>
+
     <mat-divider style="margin-top: 40px;margin-bottom: 40px;"></mat-divider>
 
-    <mat-form-field>
-        <mat-label>Mot de passe actuel</mat-label>
-        <input matInput [type]="hideOldPassword ? 'password' : 'text'" [(ngModel)]="oldPassword"  autocomplete="off">
-        <mat-icon matSuffix color="primary"
-                  (click)="toggleInput('oldPassword')">remove_red_eye</mat-icon>
-    </mat-form-field>
 
   <div *ngIf="passwordError" class="error-message alert alert-danger">
     Le mot de passe actuel est incorrect. Veuillez réessayer.
   </div>
 
     <mat-form-field>
+        <mat-label>Mot de passe actuel</mat-label>
+        <input matInput (input)="onInputChange()" [type]="hideOldPassword ? 'password' : 'text'" [(ngModel)]="oldPassword"  autocomplete="off">
+        <mat-icon matSuffix color="primary"
+                  (click)="toggleInput('oldPassword')">remove_red_eye</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field>
       <mat-label>Nouveau mot de passe</mat-label>
-      <input matInput [type]="hideNewPassword ? 'password' : 'text'" [(ngModel)]="newPassword"  autocomplete="new-password">
+      <input matInput (input)="onInputChange()" [type]="hideNewPassword ? 'password' : 'text'" [(ngModel)]="newPassword"  autocomplete="new-password">
       <mat-icon matSuffix color="primary"
                 (click)="toggleInput('newPassword')">remove_red_eye</mat-icon>
     </mat-form-field>
 
-    <div>
+    <div class="button-container">
         <button mat-flat-button extended color="primary" class="right-button"
         [disabled]="!isFormModified()" (click)="changeData()">Modifier</button>
     </div>

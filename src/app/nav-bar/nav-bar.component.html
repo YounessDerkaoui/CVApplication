@@ -13,13 +13,13 @@
     <div (click)="toggleMenu()">
       <span class="username">{{username}}</span>
       <mat-icon aria-hidden="false" *ngIf="!isMenuOpen" aria-label="Example home icon" fontIcon="keyboard_arrow_down"
-                class="icon"></mat-icon>
+                class="icon i-clickable"></mat-icon>
       <mat-icon aria-hidden="false" *ngIf="isMenuOpen" aria-label="Example home icon" fontIcon="keyboard_arrow_up"
-                class="icon"></mat-icon>
+                class="icon i-clickable"></mat-icon>
     </div>
     <div class="menu-list" *ngIf="isMenuOpen">
       <div class="menu-item">
-        <p>Mon compte</p>
+        <button class="button-like-paragraph" routerLink="/profile">Mon compte</button>
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,6 +12,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgIf, NgFor} from '@angular/common';
+import {ResumeService} from "../services/resume.service";
+import {UserService} from "../services/user.service";
+import {Router} from "@angular/router";
 
 export interface ExternData {
   isSelected: boolean;
@@ -22,107 +25,70 @@ export interface ExternData {
   poste: string;
 }
 
+export interface UserData {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  occupation: string;
+}
+
 @Component({
   selector: 'app-internes',
   templateUrl: './internes.component.html',
   styleUrls: ['./internes.component.scss']
 })
 
-export class InternesComponent implements AfterViewInit {
+export class InternesComponent implements AfterViewInit, OnInit {
 
   displayedColumns = ['isSelected', 'nom', 'prenom', 'email', 'phone', 'poste', 'show'];
-  documents: any[];
+  documents: any[] = [];
+  // @ts-ignore
   dataSource: MatTableDataSource<ExternData>;
   files: File[] = [];
+  rowCount: number = 0
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(public dialog: MatDialog) {
-    this.documents = [
-      {
-        nom: "Mohamed",
-        prenom: "Mohamed",
-        email: "mohamed@berexia.com",
-        phone: "0623-456-789",
-        poste: "Project Manager"
-      },
-      {
-        nom: "Bader",
-        prenom: "Bader",
-        email: "bader@berexia.com",
-        phone: "0623-456-789",
-        poste: "BA"
-      },
-      {
-        nom: "Hicham",
-        prenom: "Hicham",
-        email: "hicham@berexia.com",
-        phone: "0623-456-789",
-        poste: "Fullstack DEV"
-      },
-      {
-        nom: "Hamid",
-        prenom: "Hamid",
-        email: "hamid@berexia.com",
-        phone: "0623-456-789",
-        poste: "Architect"
-      },
-      {
-        nom: "Oussama",
-        prenom: "Oussama",
-        email: "oussama@berexia.com",
-        phone: "0623-456-789",
-        poste: "Odoo fonctionnel"
-      },
-      {
-        nom: "Abdellah",
-        prenom: "Abdellah",
-        email: "abdellah@berexia.com",
-        phone: "0623-456-789",
-        poste: "Java DEV"
-      },
-      {
-        nom: "Othmane",
-        prenom: "Othmane",
-        email: "othmane@berexia.com",
-        phone: "0623-456-789",
-        poste: "RH"
-      },
-      {
-        nom: "Ayoub",
-        prenom: "Ayoub",
-        email: "ayoub@berexia.com",
-        phone: "0623-456-789",
-        poste: "Stage PFE"
-      },
-      {
-        nom: "Yassine",
-        prenom: "Yassine",
-        email: "yassine@berexia.com",
-        phone: "0623-456-789",
-        poste: "Project Manager"
-      },
-      {
-        nom: "Amine",
-        prenom: "Amine",
-        email: "amine@berexia.com",
-        phone: "0623-456-789",
-        poste: "BA"
-      },
-    ];
+  constructor(public dialog: MatDialog,
+              private resumeService: ResumeService,
+              private userService: UserService,
+              private router: Router) {
+  }
+  ngOnInit() {
+    this.userService.getInternalUsers().subscribe({
+      next: (data)=>{
+        data.users.forEach((user: UserData) => {
+          this.documents.push({
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            phoneNumber: user.phoneNumber,
+            occupation: user.occupation,
+          })
+        });
+        this.rowCount = this.documents.length
+        this.dataSource = new MatTableDataSource(this.documents);
 
-    this.dataSource = new MatTableDataSource(this.documents);
+      },
+      error: (err)=>{
+        console.log(err)
+      }
+    });
   }
 
-  ngAfterViewInit() {
+  async ngAfterViewInit() {
+    await new Promise(resolve => setTimeout(resolve, 10));
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
   selectAll(event: MatCheckboxChange) {
     const isChecked = event.checked;
-  
+
     for (const row of this.dataSource.data) {
       row.isSelected = isChecked;
     }
