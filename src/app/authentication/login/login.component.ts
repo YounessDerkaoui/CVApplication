@@ -13,6 +13,7 @@ export class LoginComponent {
   username:string = '';
   password:string = '';
   error: boolean = false;
+  errorMsg: string = "";
 
   constructor(private router:Router,private authService:AuthService) { }
 
@@ -27,6 +28,8 @@ export class LoginComponent {
       },
       (error) => {
         console.log(error)
+        this.errorMsg = error.error.error;
+        console.log(this.errorMsg)
         this.error = true;
       }
     );

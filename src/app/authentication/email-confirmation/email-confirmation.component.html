@@ -11,10 +11,14 @@
     </mat-card-content>
   </mat-card>
 
+  <div *ngIf="error" class="error-message alert alert-danger">
+    L'adresse e-mail n'existe pas.
+  </div>
+
   <div class="example-container">
     <mat-form-field>
       <mat-label>Adresse mail</mat-label>
-      <input matInput autocomplete="off" [(ngModel)]="email">
+      <input (input)="onInputChange()"  matInput autocomplete="off" [(ngModel)]="email">
       <mat-icon matSuffix style="color: #008cff;">email</mat-icon>
     </mat-form-field>
   </div>

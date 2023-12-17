@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {identity} from "rxjs";
 import {UserService} from "../services/user.service";
+import {positions} from "../../shared/job-titles";
 
 @Component({
   selector: 'app-settings',
@@ -28,7 +29,6 @@ export class SettingsComponent implements OnInit{
   usernameError: boolean = false;
   emailError: boolean = false;
   passwordError: boolean = false;
-  positions: string[] = ['Dev', 'BA', 'Manager','RH'];
 
 
   constructor(private userService: UserService) {
@@ -55,6 +55,7 @@ export class SettingsComponent implements OnInit{
       reader.onloadend = () => {
         // @ts-ignore
         this.profilePicture = reader.result;
+        this.oldProfilePicture = this.profilePicture;
         console.log(this.profilePicture)
       };
       reader.readAsDataURL(imageBlob);
@@ -79,14 +80,15 @@ export class SettingsComponent implements OnInit{
     if (this.username != this.oldUsername ||
       this.email != this.oldEmail ||
       this.currentPosition != this.oldCurrentPosition ||
+      this.profilePicture != this.oldProfilePicture ||
       (this.oldPassword != "" && this.newPassword != "")) {
       return true;
     }
-    return true;
+    return false;
   }
 
   changeData() {
-    if (this.selectedFile) {
+    if (this.selectedFile && (this.profilePicture != this.oldProfilePicture)) {
       console.log(98888)
       this.userService.changeProfilePicture(this.selectedFile).subscribe(
         (response) => {
@@ -95,6 +97,7 @@ export class SettingsComponent implements OnInit{
             reader.onloadend = () => {
               // @ts-ignore
               this.profilePicture = reader.result;
+              this.oldProfilePicture = this.profilePicture
               console.log(this.profilePicture)
             };
             reader.readAsDataURL(imageBlob);
@@ -161,9 +164,22 @@ export class SettingsComponent implements OnInit{
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
+    if (this.selectedFile) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        // 'e.target.result' contains the base64-encoded image
+        this.profilePicture = e.target.result;
+      };
+      // Read the file as a data URL, triggering the onload event above
+      reader.readAsDataURL(this.selectedFile);
+    }
   }
 
   onInputChange() {
     this.passwordError = false;
+    this.usernameError = false;
+    this.emailError = false;
   }
+
+  protected readonly positions = positions;
 }

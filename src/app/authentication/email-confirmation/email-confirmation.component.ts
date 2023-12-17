@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class EmailConfirmationComponent {
 
   email:string = '';
+  error: boolean = false;
 
   constructor(private router:Router,private authService:AuthService, private snackBar: MatSnackBar) { }
 
@@ -29,8 +30,13 @@ export class EmailConfirmationComponent {
         });
       },
       (error) => {
+        this.error = true;
         console.log(error)
       }
     )
+  }
+
+  onInputChange() {
+    this.error = false;
   }
 }

@@ -2,27 +2,35 @@
 <mat-dialog-content class="mat-typography">
     <div class="filter-div">
         <!--Nom-->
-        <mat-form-field>
+    <!--    <mat-form-field>
             <mat-label>Nom</mat-label>
             <input matInput autocomplete="off">
         </mat-form-field>
-        <!--Prénom-->
+        &lt;!&ndash;Prénom&ndash;&gt;
         <mat-form-field>
             <mat-label>Prénom</mat-label>
             <input matInput autocomplete="off">
-        </mat-form-field>
-        <!--Competences-->
+        </mat-form-field>-->
+<!--        &lt;!&ndash;Competences&ndash;&gt;
         <mat-form-field>
             <mat-label>Compétences</mat-label>
             <input matInput autocomplete="off">
-        </mat-form-field>
+        </mat-form-field>-->
     </div>
 
     <div class="filter-div">
         <!--Technologies-->
         <mat-form-field>
             <mat-label>Technologies</mat-label>
-            <input matInput autocomplete="off">
+          <mat-select [formControl]="skills" multiple>
+            <mat-select-trigger>
+              {{skills.value?.[0] || ''}}
+              <span *ngIf="(skills.value?.length || 0) > 1" class="example-additional-selection">
+                  (+{{(skills.value?.length || 0) - 1}} {{skills.value?.length === 2 ? 'autre' : 'autres'}})
+                </span>
+            </mat-select-trigger>
+            <mat-option *ngFor="let topping of skillsList" [value]="topping">{{topping}}</mat-option>
+          </mat-select>
         </mat-form-field>
         <!--Projet-->
         <mat-form-field>
@@ -70,5 +78,6 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-flat-button extended color="accent" mat-dialog-close>Annuler</button>
-    <button mat-flat-button extended color="primary" [mat-dialog-close]="true" cdkFocusInitial>Appliquer</button>
+    <button mat-flat-button extended color="primary" [mat-dialog-close]="true"
+            (click)="applyFilters()" cdkFocusInitial>Appliquer</button>
 </mat-dialog-actions>

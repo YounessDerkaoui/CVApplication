@@ -102,6 +102,28 @@ export class UserService {
     return this.http.get<any>(INTERN_USERS_API);
   }
 
+  getInternalUsersBasedOnPosition(selectedPosts: any){
+    return this.http.post<any>(environment.baseUrl + "/users/occupations",{selectedPosts});
+  }
+
+  getUsersBasedOnIds(ids: any){
+    console.log(ids)
+    // @ts-ignore
+    return this.http.post<any>(environment.baseUrl + "/users/excel-data",{ids}, { responseType: 'arraybuffer' });
+  }
+
+  getInternalUsersBasedOnSkills(skills: any){
+    return this.http.post<any>(environment.baseUrl + "/users/skills",{skills});
+  }
+
+  getInternalUsersBasedOnEducation(degreeTitle: any){
+    return this.http.post<any>(environment.baseUrl + "/users/degree-title",{degreeTitle});
+  }
+
+  getInternalUsersBasedOnProjectName(projectName: any){
+    return this.http.post<any>(environment.baseUrl + "/users/project-name",{projectName});
+  }
+
   getUserDetails(id: string): Observable<any> {
     console.log(environment.baseUrl + "/users/" + id)
     return this.http.get(environment.baseUrl + "/users/" + id);

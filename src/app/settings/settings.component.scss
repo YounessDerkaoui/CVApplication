@@ -13,6 +13,19 @@
         margin-top: 1.7rem;
     }
 }
+.form-group {
+  display: flex;
+  align-items: center;
+}
+
+.form-label {
+  margin-right: 10px; /* Adjust this margin as needed */
+}
+
+.preview-image {
+  margin-left: 10px; /* Adjust this margin as needed */
+}
+
 .button-container {
   display: flex;
   justify-content: flex-end;

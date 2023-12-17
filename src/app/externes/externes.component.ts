@@ -24,8 +24,9 @@ export interface ExternData {
   templateUrl: './externes.component.html',
   styleUrls: ['./externes.component.scss']
 })
-export class ExternesComponent implements AfterViewInit, OnInit{
-  loading: boolean = true;
+export class ExternesComponent implements AfterViewInit, OnInit {
+
+  dataLoaded: boolean = false;
   displayedColumns = ['isSelected', 'documentName', 'show', 'download'];
   documents: any[] = [];
   // @ts-ignore
@@ -45,7 +46,7 @@ export class ExternesComponent implements AfterViewInit, OnInit{
 
   ngOnInit() {
     this.userService.getExternalUsers().subscribe({
-      next: (data)=>{
+      next: (data) => {
         data.users.forEach((user: { id: number; resume: string; createdAt: string }) => {
           const resumePath = user.resume;
           const indexOfKeybr = resumePath.indexOf("keybr");
@@ -57,18 +58,30 @@ export class ExternesComponent implements AfterViewInit, OnInit{
         });
         this.rowCount = this.documents.length
         this.dataSource = new MatTableDataSource(this.documents);
-
+        this.dataLoaded = true;
       },
-      error: (err)=>{
+      error: (err) => {
         console.log(err)
       }
     });
   }
 
-  async ngAfterViewInit() {
-    await new Promise(resolve => setTimeout(resolve, 10));
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  ngAfterViewInit() {
+    this.waitForDataToLoad().then(() => {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
+  }
+
+  private waitForDataToLoad(): Promise<void> {
+    return new Promise<void>((resolve) => {
+      const checkDataInterval = setInterval(() => {
+        if (this.dataLoaded) {
+          clearInterval(checkDataInterval);
+          resolve();
+        }
+      }, 10);
+    });
   }
 
   selectAll(event: MatCheckboxChange) {
@@ -89,16 +102,16 @@ export class ExternesComponent implements AfterViewInit, OnInit{
     }
   }
 
-	onSelect(event: any) {
-		console.log(this.files);
-		this.files.push(...event.addedFiles);
+  onSelect(event: any) {
     console.log(this.files);
-	}
+    this.files.push(...event.addedFiles);
+    console.log(this.files);
+  }
 
-	onRemove(event: any) {
-		console.log(event);
-		this.files.splice(this.files.indexOf(event), 1);
-	}
+  onRemove(event: any) {
+    console.log(event);
+    this.files.splice(this.files.indexOf(event), 1);
+  }
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     if (this.files.length > 0) {
@@ -108,7 +121,7 @@ export class ExternesComponent implements AfterViewInit, OnInit{
           this.files = []
           await new Promise(resolve => setTimeout(resolve, 1000));
           this.dialog.closeAll()
-          this.router.navigateByUrl('', { skipLocationChange: true }).then(() => {
+          this.router.navigateByUrl('', {skipLocationChange: true}).then(() => {
             this.router.navigate(['/externes']);
           });
         },
