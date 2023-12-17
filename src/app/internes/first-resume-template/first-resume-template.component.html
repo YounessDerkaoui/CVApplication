@@ -5,18 +5,20 @@
       [formData]="formData"
     ></app-editor>
 
-    <app-preview
-      [formData]="formData"
-    ></app-preview>
+    <div #appPreview>
+      <app-preview
+        [formData]="formData"
+      ></app-preview>
+    </div>
 
-    <!--  <div class="btn-container__preview">-->
-    <!--    <button-->
-    <!--      class="btn__toggle-preview material-symbols-outlined"-->
-    <!--      type="button"-->
-    <!--      (click)="downloadResume()">-->
-    <!--      download-->
-    <!--    </button>-->
-    <!--  </div>-->
+      <div class="btn-container__preview">
+        <button
+          class="btn__toggle-preview material-symbols-outlined"
+          type="button"
+          (click)="downloadResume()">
+          download
+        </button>
+      </div>
   </div>
 </div>
 
