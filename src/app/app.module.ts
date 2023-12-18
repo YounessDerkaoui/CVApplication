@@ -52,6 +52,8 @@ import { PasswordResetComponent } from './authentication/password-reset/password
 import {LoginComponent} from "./authentication/login/login.component";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { ProfileComponent } from './profile/profile.component';
+import { PieChartComponent } from './dashboard/pie-chart/pie-chart.component';
+import {NgApexchartsModule} from "ng-apexcharts";
 
 
 
@@ -86,7 +88,8 @@ import { ProfileComponent } from './profile/profile.component';
     LoginComponent,
     EmailConfirmationComponent,
     PasswordResetComponent,
-    ProfileComponent
+    ProfileComponent,
+    PieChartComponent
   ],
   imports: [
     BrowserModule,
@@ -110,7 +113,8 @@ import { ProfileComponent } from './profile/profile.component';
     ReactiveFormsModule,
     MatSelectModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    NgApexchartsModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent]

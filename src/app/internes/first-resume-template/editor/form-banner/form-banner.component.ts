@@ -10,6 +10,7 @@ export class FormBannerComponent {
   @Input() id!: string;
   @Input() mainText!: string;
   @Input() subText!: string;
+  @Input() selectedId!: string;
   @Output() editItem: EventEmitter<any> = new EventEmitter<any>();
   @Output() deleteItem: EventEmitter<any> = new EventEmitter<any>();
 

@@ -4,6 +4,7 @@ import {UserService} from "../../services/user.service";
 import * as jsPDF from "jspdf";
 import * as jspdf from "jspdf";
 import html2canvas from "html2canvas";
+import {ActivatedRoute} from "@angular/router";
 
 
 
@@ -16,7 +17,7 @@ export class FirstResumeTemplateComponent implements OnInit{
 
   // @ts-ignore
   @ViewChild('appPreview', { static: false }) appPreview: ElementRef;
-
+  userId!: string;
   formData: IFormData = {
     basicInfo: {
       firstName: '',
@@ -37,18 +38,22 @@ export class FirstResumeTemplateComponent implements OnInit{
     languageInfo:[]
   };
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.userService.getUserDetails("1").subscribe({
-      next: (data)=>{
-        this.formData = data;
-        console.log(data)
-      },
-      error: (err)=>{
-        console.log(err);
-      }
+    this.route.params.subscribe(params => {
+      this.userId = params['id'];
+      this.userService.getUserDetails(this.userId).subscribe({
+        next: (data)=>{
+          this.formData = data;
+          console.log(data)
+        },
+        error: (err)=>{
+          console.log(err);
+        }
+      });
     });
   }
 
@@ -76,7 +81,4 @@ export class FirstResumeTemplateComponent implements OnInit{
       pdf.save('resume.pdf');
     });
   }
-
-
-
 }

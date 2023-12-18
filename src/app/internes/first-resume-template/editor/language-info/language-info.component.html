@@ -7,6 +7,7 @@
     <app-form-banner *ngFor="let langInfo of languageInfo"
                      [id]="langInfo.id"
                      [subText]="langInfo.language"
+                     [selectedId]="selectedId"
                      (deleteItem)="deleteLanguageInfo(langInfo.id)"
                      (editItem)="editLanguageInfo(langInfo.id)"
     ></app-form-banner>
@@ -20,33 +21,36 @@
              formControlName="language"
       />
     </label>
-    <mat-form-field>
-      <mat-label>Parler</mat-label>
-      <mat-select formControlName="speak">
-        <mat-option *ngFor="let proficiency of proficiencyOptions"
-                    [value]="proficiency">
-          {{ proficiency }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Lire</mat-label>
-      <mat-select formControlName="read">
-        <mat-option *ngFor="let proficiency of proficiencyOptions"
-                    [value]="proficiency">
-          {{ proficiency }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Ecrire</mat-label>
-      <mat-select formControlName="write">
-        <mat-option *ngFor="let proficiency of proficiencyOptions"
-                    [value]="proficiency">
-          {{ proficiency }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <label class="form-label">
+      <span class="form-label__title">Parler :</span>
+      <select
+        name="speak"
+        class="form-input form-input__job-title"
+        formControlName="speak"
+      >
+        <option *ngFor="let proficiency of proficiencyOptions" [value]="proficiency">{{ proficiency }}</option>
+      </select>
+    </label>
+    <label class="form-label">
+      <span class="form-label__title">Lire :</span>
+      <select
+        name="read"
+        class="form-input form-input__job-title"
+        formControlName="read"
+      >
+        <option *ngFor="let proficiency of proficiencyOptions" [value]="proficiency">{{ proficiency }}</option>
+      </select>
+    </label>
+    <label class="form-label">
+      <span class="form-label__title">Ecrire :</span>
+      <select
+        name="write"
+        class="form-input form-input__job-title"
+        formControlName="write"
+      >
+        <option *ngFor="let proficiency of proficiencyOptions" [value]="proficiency">{{ proficiency }}</option>
+      </select>
+    </label>
   </fieldset>
   <button type="submit" class="btn btn__submit">Soumettre</button>
 </form>

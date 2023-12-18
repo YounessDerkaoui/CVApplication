@@ -75,6 +75,7 @@
   border: none;
   min-width: 700px;
   position: relative;
+  overflow-y: auto;
   max-height: 100vh;
   padding: 0px 50px 50px;
 
@@ -246,12 +247,10 @@
     gap: 50px;
     padding: 15px;
     background-color: white;
-    height: 862.5px;
     width: 820px;
     font-family: var(--font-raleway);
     color: black;
     line-height: normal;
-    overflow: auto;
   }
 
   &__main-col {

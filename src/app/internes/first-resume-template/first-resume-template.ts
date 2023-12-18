@@ -39,6 +39,7 @@ export interface IEducationInfo {
 export interface IExperienceInfo {
   id: string;
   jobTitle: string;
+  internJobTitle: string;
   company: string;
   startingYear: string;
   onGoing: boolean;
@@ -55,15 +56,9 @@ export interface IAdditionalInfo{
 export interface ILanguageInfo {
   id: string;
   language: string;
-  speak: LanguageProficiency;
-  read: LanguageProficiency;
-  write: LanguageProficiency;
+  speak: string;
+  read: string;
+  write: string;
 }
 
-export enum LanguageProficiency {
-  VERY_GOOD = 'Très bien',
-  GOOD = 'Bien',
-  WEAK = 'Faible',
-  NOT_AT_ALL = 'Pas du tout'
-}
 

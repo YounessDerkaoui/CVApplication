@@ -2,6 +2,8 @@ import {Component, Input, Output, OnInit, EventEmitter} from '@angular/core';
 import {nanoid} from "nanoid";
 import {FormGroup, FormControl} from '@angular/forms';
 import {IExperienceInfo, IAdditionalInfo} from "../../first-resume-template";
+import {positions} from "../../../../../shared/job-titles";
+import {projectsList} from "../../../../../shared/projects-list";
 
 @Component({
   selector: 'app-experience-info',
@@ -15,6 +17,7 @@ export class ExperienceInfoComponent implements OnInit{
   expInfoEmptState: IExperienceInfo = {
     id: '',
     jobTitle: '',
+    internJobTitle: '',
     company: '',
     startingYear: '',
     onGoing: true,
@@ -24,10 +27,13 @@ export class ExperienceInfoComponent implements OnInit{
   };
   expInfo: IExperienceInfo = {...this.expInfoEmptState};
   isOnGoing: boolean = true;
+  jobTitles: string[] = projectsList;
+  selectedId: string = "";
 
   constructor() {
     this.expForm = new FormGroup({
       jobTitle: new FormControl(''),
+      internJobTitle: new FormControl(''),
       company: new FormControl(''),
       startingYear: new FormControl(''),
       onGoing: new FormControl(true),
@@ -65,8 +71,10 @@ export class ExperienceInfoComponent implements OnInit{
   }
 
   submitExpInfo(): void {
+    this.selectedId = "";
     this.expInfo.id = nanoid();
     this.expInfo.jobTitle = this.expForm.get('jobTitle')?.value;
+    this.expInfo.internJobTitle = this.expForm.get('internJobTitle')?.value;
     this.expInfo.company = this.expForm.get('company')?.value;
     this.expInfo.startingYear = this.expForm.get('startingYear')?.value;
     this.expInfo.onGoing = this.expForm.get('onGoing')?.value;
@@ -86,6 +94,7 @@ export class ExperienceInfoComponent implements OnInit{
     this.expInfo.additionalInfo = [];
     this.expForm.patchValue({
       jobTitle: this.expInfo.jobTitle,
+      internJobTitle: this.expInfo.internJobTitle,
       company: this.expInfo.company,
       startingYear: this.expInfo.startingYear,
       onGoing: this.expInfo.onGoing,
@@ -95,9 +104,12 @@ export class ExperienceInfoComponent implements OnInit{
   }
 
   editExpInfo(id: string): void {
+    // @ts-ignore
+    this.selectedId = id;
     this.expInfo = this.experienceInfo.find((expInfo: IExperienceInfo) => expInfo.id === id)!;
     this.expForm.patchValue({
       jobTitle: this.expInfo.jobTitle,
+      internJobTitle: this.expInfo.internJobTitle,
       company: this.expInfo.company,
       startingYear: this.expInfo.startingYear,
       onGoing: this.expInfo.onGoing,

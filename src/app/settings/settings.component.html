@@ -45,8 +45,8 @@
         (change)="onFileSelected($event)"
       />
     </label>
-    <div class="preview-image" *ngIf="profilePicture">
-      <img [src]="profilePicture" width="90" height="90" style="border-radius: 50%" />
+    <div class="preview-image">
+      <img [src]="profilePicture || 'assets/images/default_profile_pic.png'" width="90" height="90" style="border-radius: 50%" />
     </div>
   </div>
 

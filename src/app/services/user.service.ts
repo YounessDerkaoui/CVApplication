@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {combineLatest, forkJoin, map, Observable} from "rxjs";
 import {IFormData} from "../internes/first-resume-template/first-resume-template";
 import {environment} from "../../environments/environment";
+import {positions} from "../../shared/job-titles";
+import {skills} from "../../shared/skills";
 
 const INTERN_RESUMES_COUNT_API = environment.baseUrl + '/users/count?type=intern';
 const EXTERN_RESUMES_COUNT_API = environment.baseUrl + '/users/count?type=extern';
@@ -12,6 +14,7 @@ const LAST_MODIFIED_RESUMES_COUNT_API = environment.baseUrl + '/users/count?type
 const EXTERN_USERS_API = environment.baseUrl + '/users?type=extern';
 const INTERN_USERS_API = environment.baseUrl + '/users?type=intern';
 const UPDATE_USER_API = environment.baseUrl + '/users';
+const CHART_DATA_API = environment.baseUrl + '/users/chart';
 
 
 
@@ -40,6 +43,10 @@ export class UserService {
 
   getLastModifiedResumesCount(): Observable<any> {
     return this.http.get<any>(LAST_MODIFIED_RESUMES_COUNT_API);
+  }
+
+  getDataForChart(educationFormation: any,positions: any,skills: any): Observable<any> {
+    return this.http.post<any>(CHART_DATA_API,{educationFormation, positions, skills});
   }
 
   getDashboardInfo(): Observable<any> {

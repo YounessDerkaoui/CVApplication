@@ -1,7 +1,9 @@
 import {Component, Input} from '@angular/core';
-import {IEducationInfo, ILanguageInfo, LanguageProficiency} from "../../first-resume-template";
+import {IEducationInfo, ILanguageInfo} from "../../first-resume-template";
 import {FormControl, FormGroup} from "@angular/forms";
 import {nanoid} from "nanoid";
+import {projectsList} from "../../../../../shared/projects-list";
+import {LanguageProficiency} from "../../../../../shared/language-proficiency";
 
 @Component({
   selector: 'app-language-info',
@@ -15,12 +17,13 @@ export class LanguageInfoComponent {
   langInfoEmptyState: ILanguageInfo = {
     id: '',
     language: '',
-    speak: LanguageProficiency.NOT_AT_ALL,
-    read: LanguageProficiency.NOT_AT_ALL,
-    write: LanguageProficiency.NOT_AT_ALL,
+    speak: '',
+    read: '',
+    write: '',
   };
   langInfo: ILanguageInfo = {...this.langInfoEmptyState};
-  proficiencyOptions = Object.values(LanguageProficiency);
+  proficiencyOptions: string[] = LanguageProficiency;
+  selectedId: string = "";
 
   constructor() {
     this.langForm = new FormGroup({
@@ -35,6 +38,8 @@ export class LanguageInfoComponent {
   }
 
   submitLanguageInfo() {
+    console.log(11)
+    this.selectedId = "";
     this.langInfo.id = nanoid();
     this.langInfo.language = this.langForm.get('language')?.value;
     this.langInfo.speak = this.langForm.get('speak')?.value;
@@ -52,13 +57,17 @@ export class LanguageInfoComponent {
   }
 
   editLanguageInfo(id: string) {
+    // @ts-ignore
+    this.selectedId = id;
     this.langInfo = this.languageInfo.find((languageInfo: ILanguageInfo) => languageInfo.id === id)!;
+    console.log(this.langInfo)
     this.langForm.patchValue({
       language: this.langInfo.language,
       speak: this.langInfo.speak,
       read: this.langInfo.read,
       write: this.langInfo.write,
     });
+    console.log(this.langForm)
     const indexToRemove = this.languageInfo.findIndex((languageInfo: ILanguageInfo) => languageInfo.id === id);
     if (indexToRemove !== -1) {
       this.languageInfo.splice(indexToRemove, 1);

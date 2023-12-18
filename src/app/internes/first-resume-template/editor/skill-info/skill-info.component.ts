@@ -14,6 +14,7 @@ export class SkillInfoComponent implements OnInit{
   skillForm: FormGroup;
   skillInfoEmptyState: ISkillsInfo = { id: '', content: '' };
   skillInfo: ISkillsInfo = {...this.skillInfoEmptyState};
+  selectedId: string = "";
 
   constructor() {
     this.skillForm = new FormGroup({
@@ -31,6 +32,7 @@ export class SkillInfoComponent implements OnInit{
   }
 
   submitSkillInfo(): void {
+    this.selectedId = "";
     this.skillInfo.id = nanoid();
     this.skillInfo.content = this.skillForm.get('content')?.value;
     this.skillsInfo.push(this.skillInfo);
@@ -41,6 +43,8 @@ export class SkillInfoComponent implements OnInit{
   }
 
   editSkillInfo(id: String): void {
+    // @ts-ignore
+    this.selectedId = id;
     this.skillInfo = this.skillsInfo.find((skillInfo: ISkillsInfo) => skillInfo.id === id)!;
     this.skillForm.patchValue({
       content: this.skillInfo.content,

@@ -7,20 +7,31 @@
     <app-form-banner
       *ngFor="let expInfo of experienceInfo"
       [id]="expInfo.id"
-      [subText]="expInfo.jobTitle"
+      [subText]="expInfo.jobTitle ? expInfo.jobTitle : expInfo.internJobTitle"
+      [selectedId]="selectedId"
       (deleteItem)="deleteExpInfo($event)"
       (editItem)="editExpInfo($event)"
     ></app-form-banner>
   </div>
   <fieldset class="form-fieldset form__experience-info">
     <label class="form-label">
-      <span class="form-label__title">Intitulé du projet SI :</span>
+      <span class="form-label__title">Intitulé du projet externe SI :</span>
       <input
         type="text"
         name="jobTitle"
         class="form-input form-input__job-title"
         formControlName="jobTitle"
       />
+    </label>
+    <label class="form-label">
+      <span class="form-label__title">Intitulé du projet interne SI :</span>
+      <select
+        name="internJobTitle"
+        class="form-input form-input__job-title"
+        formControlName="internJobTitle"
+      >
+        <option *ngFor="let title of jobTitles" [value]="title">{{ title }}</option>
+      </select>
     </label>
     <label class="form-label">
       <span class="form-label__title">Organisme concerné par le projet :</span>

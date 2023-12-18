@@ -1,7 +1,8 @@
-import {Component, Input, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActiveRouteService} from "../services/active-route.service";
 import {MatDialog, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {UserService} from "../services/user.service";
 
 @Component({
   selector: 'app-nav-bar',
@@ -16,18 +17,30 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
     ]),
   ],
 })
-export class NavBarComponent {
+export class NavBarComponent implements OnInit{
 
   @Input() collapsed = false;
   @Input() screenWidth = 0;
   activeRouteLabel: string = '';
   username: string = localStorage.getItem("username")!
+  id: string = localStorage.getItem("id")!
   isMenuOpen: boolean = false;
+  profilePicture: string = "";
 
-
-  constructor(private activeRouteService: ActiveRouteService, public dialog: MatDialog) {}
+  constructor(private activeRouteService: ActiveRouteService,
+              public dialog: MatDialog,
+              private userService: UserService) {}
 
   ngOnInit() {
+    // @ts-ignore
+    this.userService.getProfilePicture().subscribe((imageBlob: Blob) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        // @ts-ignore
+        this.profilePicture = reader.result;
+      };
+      reader.readAsDataURL(imageBlob);
+    });
     this.activeRouteService.activeRouteLabel$.subscribe(label => {
       if (label === "Tableau de bord") {
         this.activeRouteLabel = "Tableau de bord"
@@ -70,6 +83,8 @@ export class NavBarComponent {
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
+
+    protected readonly localStorage = localStorage;
 }
 
 @Component({

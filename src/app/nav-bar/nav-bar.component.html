@@ -8,7 +8,7 @@
   </div>-->
 
   <div class="container">
-    <img src='https://www.himalmag.com/wp-content/uploads/2019/07/sample-profile-picture.png'
+    <img [src]="profilePicture || 'assets/images/default_profile_pic.png'"
          width="90" height="90" class="hy-profile-image" />
     <div (click)="toggleMenu()">
       <span class="username">{{username}}</span>
@@ -19,11 +19,9 @@
     </div>
     <div class="menu-list" *ngIf="isMenuOpen">
       <div class="menu-item">
-        <button class="button-like-paragraph" routerLink="/profile">Mon compte</button>
+        <button class="button-like-paragraph" [routerLink]="['/profile', id]">Mon compte</button>
       </div>
     </div>
   </div>
-
-
 
 </div>

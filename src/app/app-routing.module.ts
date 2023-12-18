@@ -23,13 +23,13 @@ const routes: Routes = [
         path: 'internes', children: [
           {path: '', component: InternesComponent, pathMatch: 'full'},
           {
-            path: 'template', children: [
+            path: 'template/:id', children: [
               {path: '', component: FirstResumeTemplateComponent, pathMatch: 'full'}
             ]
           },
         ]
       },
-      {path: 'profile', component: ProfileComponent},
+      {path: 'profile/:id', component: ProfileComponent},
       {path: 'externes', component: ExternesComponent},
       {path: 'settings', component: SettingsComponent},
     ]

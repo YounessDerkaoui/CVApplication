@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IFormData} from "../internes/first-resume-template/first-resume-template";
 import {UserService} from "../services/user.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit{
 
+  userId!: string;
   formData: IFormData = {
     basicInfo: {
       firstName: '',
@@ -29,45 +31,34 @@ export class ProfileComponent {
     languageInfo:[]
   };
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    const userId = localStorage.getItem('id')!;
-    this.userService.getUserDetails(userId).subscribe({
-      next: (data) => {
-        this.formData = data;
-        console.log(data);
-        console.log(121212);
-
-        // Check if the user has a picture
-        if (data.basicInfo.picture) {
-          // Retrieve and display the image
-          this.loadImage(userId);
+    this.route.params.subscribe(params => {
+      this.userId = params['id'];
+      this.userService.getUserDetails(this.userId).subscribe({
+        next: (data)=>{
+          this.formData = data;
+          console.log(data)
+        },
+        error: (err)=>{
+          console.log(err);
         }
-      },
-      error: (err) => {
-        console.log(err);
-      },
+      });
     });
   }
 
-  loadImage(userId: string): void {
-    this.userService.getImage(userId).subscribe(
-      (data: any) => {
-        console.log(data);
-        console.log(12121333332);
-        // Create a Blob from the binary data received
-        const blob = new Blob([data], { type: 'image/png' });
-        console.log(blob);
-        // Create a data URL from the Blob
-        const urlCreator = window.URL || window.webkitURL;
-        console.log(urlCreator.createObjectURL(blob));
-        this.formData.basicInfo.picture = urlCreator.createObjectURL(blob);
+  uploadData() {
+    console.log(this.formData)
+    this.userService.uploadUserDetails(this.formData).subscribe({
+      next: (data)=>{
+        console.log(data)
       },
-      (error) => {
-        console.error('Error fetching image:', error);
+      error: (err)=>{
+        console.log(err)
       }
-    );
+    });
   }
 }

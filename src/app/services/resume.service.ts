@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 
 const UPLOAD_RESUME_API = environment.baseUrl + '/upload-resumes';
+const UPLOAD_RESUME_INTERNS_API = environment.baseUrl + '/upload-resumes/interns';
 const DOWNLOAD_RESUME_API = environment.baseUrl + '/users/download';
 
 @Injectable({
@@ -35,5 +36,16 @@ export class ResumeService {
     }
 
     return this.http.post<any>(UPLOAD_RESUME_API, formData);
+  }
+
+
+  uploadResumesForInterns(files: File[]) {
+    const formData: FormData = new FormData();
+
+    for (const file of files) {
+      formData.append('resumes', file);
+    }
+
+    return this.http.post<any>(UPLOAD_RESUME_INTERNS_API, formData);
   }
 }

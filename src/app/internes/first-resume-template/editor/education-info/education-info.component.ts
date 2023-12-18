@@ -22,6 +22,7 @@ export class EducationInfoComponent implements OnInit{
   };
   educInfo: IEducationInfo = {...this.educInfoEmptyState};
   isOnGoing: boolean = true;
+  selectedId: string = "";
 
   constructor() {
     this.educForm = new FormGroup({
@@ -43,6 +44,7 @@ export class EducationInfoComponent implements OnInit{
   }
 
   submitEducationInfo() {
+    this.selectedId = "";
     this.educInfo.id = nanoid();
     this.educInfo.degreeTitle = this.educForm.get('degreeTitle')?.value;
     this.educInfo.institution = this.educForm.get('institution')?.value;
@@ -61,6 +63,8 @@ export class EducationInfoComponent implements OnInit{
   }
 
   editEducationInfo(id: string) {
+    // @ts-ignore
+    this.selectedId = id;
     this.educInfo = this.educationInfo.find((educationInfo: IEducationInfo) => educationInfo.id === id)!;
     this.educForm.patchValue({
       degreeTitle: this.educInfo.degreeTitle,

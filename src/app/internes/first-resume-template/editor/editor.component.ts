@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {IFormData, LanguageProficiency} from "../first-resume-template";
+import {IFormData} from "../first-resume-template";
 import {UserService} from "../../../services/user.service";
 
 

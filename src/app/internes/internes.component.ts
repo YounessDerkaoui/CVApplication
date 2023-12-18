@@ -132,6 +132,22 @@ export class InternesComponent implements AfterViewInit, OnInit {
   }
 
   openImportDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    if (this.files.length > 0) {
+      this.resumeService.uploadResumesForInterns(this.files).subscribe(
+        async (response) => {
+          console.log('Resumes uploaded successfully!', response);
+          this.files = []
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          this.dialog.closeAll()
+          this.router.navigateByUrl('', {skipLocationChange: true}).then(() => {
+            this.router.navigate(['/internes']);
+          });
+        },
+        (error) => {
+          console.error('Error uploading resumes:', error);
+        }
+      );
+    }
     this.dialog.open(ImportNotifications, {
       width: '40%',
       enterAnimationDuration,
@@ -173,6 +189,15 @@ export class InternesComponent implements AfterViewInit, OnInit {
       }, error => {
         console.error('Error downloading Excel file:', error);
       });
+    }
+  }
+
+  navigateToGenerateResume() {
+    const selectedObjectIds = this.dataSource.data
+      .filter((obj:any) => obj.hasOwnProperty('isSelected') && obj.isSelected === true)
+      .map((obj:any) => obj.id);
+    if (selectedObjectIds.length == 1) {
+      this.router.navigate(['/internes/template', selectedObjectIds[0]]);
     }
   }
 }

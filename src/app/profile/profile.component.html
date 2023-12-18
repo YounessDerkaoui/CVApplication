@@ -1,10 +1,36 @@
 <div class="first-template">
-  <div class="App">
+  <div class="App profile-app">
 
-    <app-editor
-      [enableOverflowY]="false"
-      [formData]="formData"
-    ></app-editor>
+    <div class="editor profile-scroll">
+
+      <app-basic-info
+        [basicInfo]="formData.basicInfo"
+      ></app-basic-info>
+
+      <app-skill-info
+        [skillsInfo]="formData.skillsInfo"
+      ></app-skill-info>
+
+      <app-education-info
+        [educationInfo]="formData.educationInfo"
+      ></app-education-info>
+
+      <app-experience-info
+        [experienceInfo]="formData.experienceInfo"
+      ></app-experience-info>
+
+      <app-language-info
+        [languageInfo]="formData.languageInfo"
+      ></app-language-info>
+
+      <div class="d-grid gap-2">
+        <button class="btn btn-outline-primary" style="margin-bottom: 50px"
+                type="button"
+                (click)="uploadData()">
+          Submit</button>
+      </div>
+
+    </div>
 
   </div>
 </div>

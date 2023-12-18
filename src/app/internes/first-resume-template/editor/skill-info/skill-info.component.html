@@ -11,6 +11,7 @@
     <app-form-banner *ngFor="let skillInfo of skillsInfo"
                      [id]="skillInfo.id"
                      [subText]="skillInfo.content"
+                     [selectedId]="selectedId"
                      (deleteItem)="deleteSkillInfo($event)"
                      (editItem)="editSkillInfo($event)"
     ></app-form-banner>

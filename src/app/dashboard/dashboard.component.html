@@ -29,21 +29,32 @@
 
     <div class="horizontal-div">
 
-        <mat-card class="bottom-card">
-            <div class="horizontal-div">
-                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
-                <mat-card-title>Profils modifiés récemment</mat-card-title>
-            </div>
-            <mat-card-title>{{lastModifiedResumesCount}}</mat-card-title>
-        </mat-card>
+      <mat-card class="bottom-card" style="width: 500px">
+        <apx-chart [series]="formationChartSeries"
+                   [chart]="formationChartDetails"
+                   [labels]="formationChartLabels"
+                   [title]="formationChartTitle"
+        ></apx-chart>
+      </mat-card>
 
-        <mat-card class="bottom-card">
-            <div class="horizontal-div">
-                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home" class="icon"></mat-icon>
-                <mat-card-title>Profils Internes</mat-card-title>
-            </div>
-            <mat-card-title>{{internProfilesCount}}</mat-card-title>
-        </mat-card>
+      <mat-card class="bottom-card" style="width: 500px">
+        <apx-chart [series]="skillChartSeries"
+                   [chart]="skillChartDetails"
+                   [labels]="skillChartLabels"
+                   [title]="skillChartTitle"
+        ></apx-chart>
+      </mat-card>
+
+      <mat-card class="bottom-card" style="width: 500px">
+        <apx-chart [series]="postChartSeries"
+                   [chart]="postChartDetails"
+                   [labels]="postChartLabels"
+                   [title]="postChartTitle"
+        ></apx-chart>
+      </mat-card>
+
+
+
 
     </div>
 
