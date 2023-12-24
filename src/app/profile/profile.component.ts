@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {IFormData} from "../internes/first-resume-template/first-resume-template";
 import {UserService} from "../services/user.service";
 import {ActivatedRoute} from "@angular/router";
+import {ActiveRouteService} from "../services/active-route.service";
 
 @Component({
   selector: 'app-profile',
@@ -32,10 +33,12 @@ export class ProfileComponent implements OnInit{
   };
 
   constructor(private userService: UserService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private activateRouteService: ActiveRouteService) {
   }
 
   ngOnInit(): void {
+    this.activateRouteService.setActiveRouteLabel("Résumé Personnel");
     this.route.params.subscribe(params => {
       this.userId = params['id'];
       this.userService.getUserDetails(this.userId).subscribe({

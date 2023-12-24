@@ -17,7 +17,7 @@
       <mat-icon aria-hidden="false" *ngIf="isMenuOpen" aria-label="Example home icon" fontIcon="keyboard_arrow_up"
                 class="icon i-clickable"></mat-icon>
     </div>
-    <div class="menu-list" *ngIf="isMenuOpen">
+    <div  class="menu-list" (document:click)="closeMenu()" *ngIf="isMenuOpen">
       <div class="menu-item">
         <button class="button-like-paragraph" [routerLink]="['/profile', id]">Mon compte</button>
       </div>

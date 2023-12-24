@@ -4,6 +4,8 @@ import {ApexChart, ApexNonAxisChartSeries, ApexTitleSubtitle} from "ng-apexchart
 import {educationFormations} from "../../shared/education-formations";
 import {positions} from "../../shared/job-titles";
 import {skills} from "../../shared/skills";
+import {Router} from "@angular/router";
+import {ActiveRouteService} from "../services/active-route.service";
 
 interface DashbordContent {
   totalResumes: number;
@@ -35,7 +37,7 @@ export class DashboardComponent implements OnInit{
 
   postChartSeries: ApexNonAxisChartSeries = [];
   postChartDetails: ApexChart = {
-    type: "pie",
+    type: "donut",
     toolbar: {
       show: true
     },
@@ -65,7 +67,9 @@ export class DashboardComponent implements OnInit{
   lastModifiedResumesCount: number = 0;
   internProfilesCount: number = 0;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,
+              private router: Router,
+              private activeRouteService: ActiveRouteService) {
   }
 
   ngOnInit(): void {
@@ -110,4 +114,13 @@ export class DashboardComponent implements OnInit{
     });
   }
 
+  changeToRoute(label: string) {
+    if (label === "interns") {
+      this.activeRouteService.setActiveRouteLabel("CV Internes")
+      this.router.navigate(['/internes']);
+    } else if (label === "externs") {
+      this.activeRouteService.setActiveRouteLabel("CV Externes")
+      this.router.navigate(['/externes']);
+    }
+  }
 }

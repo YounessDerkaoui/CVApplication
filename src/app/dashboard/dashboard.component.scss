@@ -1,6 +1,7 @@
 .horizontal-div {
     display: flex;
     flex-direction: row;
+
     //background: #f4f7fa;
     box-sizing: border-box;
 
@@ -8,6 +9,19 @@
         margin-right: 3rem;
         margin-left: 3rem;
     }
+}
+.gray-box {
+  background-color: #b09f9f;
+  padding: 10px;
+  display: inline-block;
+  border-radius: 10px;
+}
+
+.white-box {
+  background-color: #cbc3c3;
+  padding: 10px;
+  display: inline-block;
+  border-radius: 10px;
 }
 
 .vertical-div {

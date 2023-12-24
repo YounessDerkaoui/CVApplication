@@ -52,7 +52,6 @@ import { PasswordResetComponent } from './authentication/password-reset/password
 import {LoginComponent} from "./authentication/login/login.component";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { ProfileComponent } from './profile/profile.component';
-import { PieChartComponent } from './dashboard/pie-chart/pie-chart.component';
 import {NgApexchartsModule} from "ng-apexcharts";
 
 
@@ -88,8 +87,7 @@ import {NgApexchartsModule} from "ng-apexcharts";
     LoginComponent,
     EmailConfirmationComponent,
     PasswordResetComponent,
-    ProfileComponent,
-    PieChartComponent
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

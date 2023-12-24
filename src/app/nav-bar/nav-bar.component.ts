@@ -56,6 +56,8 @@ export class NavBarComponent implements OnInit{
           this.activeRouteLabel = 'CV Externes'
         } else if (currentURL.includes("settings")) {
           this.activeRouteLabel = 'Paramètres'
+        } else if (currentURL.includes("profile")) {
+          this.activeRouteLabel = 'Résumé Personnel'
         }
       }
     });
@@ -81,10 +83,14 @@ export class NavBarComponent implements OnInit{
   }
 
   toggleMenu() {
+    // @ts-ignore
+    event.stopPropagation();
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-    protected readonly localStorage = localStorage;
+  closeMenu() {
+    this.isMenuOpen = false;
+  }
 }
 
 @Component({

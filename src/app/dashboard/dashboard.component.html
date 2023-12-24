@@ -1,47 +1,53 @@
 <div class="vertical-div">
     <div class="horizontal-div">
 
-        <mat-card class="top-card">
+        <mat-card class="top-card" style="background-color: black;color: wheat;">
             <div class="horizontal-div">
+              <div class="gray-box">
                 <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="file_copy"></mat-icon>
-                <mat-card-title>Totale CV</mat-card-title>
+              </div>
+              <mat-card-title style="margin-top: 10px;font-size: xx-large">Totale CV</mat-card-title>
             </div>
-            <mat-card-title style="text-align: center">{{totalResumesCount}}</mat-card-title>
+            <mat-card-title style="text-align: center;font-size: xxx-large">{{totalResumesCount}}</mat-card-title>
+        </mat-card>
+
+        <mat-card class="top-card" >
+            <div class="horizontal-div">
+              <div class="white-box">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="people"></mat-icon>
+              </div>
+              <mat-card-title (click)="changeToRoute('interns')" style="cursor: pointer;user-select: none;margin-top: 10px;font-size: xx-large">
+                CV Internes
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="keyboard_arrow_right"
+                          class="icon" style="cursor:pointer;margin-left: 10px" ></mat-icon>
+              </mat-card-title>
+            </div>
+            <mat-card-title style="text-align: center;font-size: xxx-large">{{internResumesCount}}</mat-card-title>
         </mat-card>
 
         <mat-card class="top-card">
             <div class="horizontal-div">
-                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home" class="icon"></mat-icon>
-                <mat-card-title>CV Internes</mat-card-title>
+              <div class="white-box">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="person"></mat-icon>
+              </div>
+              <mat-card-title (click)="changeToRoute('externs')" style="cursor: pointer;user-select: none;margin-top: 10px;font-size: xx-large">
+                CV Externes
+                <mat-icon aria-hidden="false" style="cursor:pointer;margin-left: 10px" (click)="changeToRoute('externs')" aria-label="Example home icon" fontIcon="keyboard_arrow_right"
+                          class="icon"></mat-icon>
+              </mat-card-title>
             </div>
-            <mat-card-title>{{internResumesCount}}</mat-card-title>
-        </mat-card>
-
-        <mat-card class="top-card">
-            <div class="horizontal-div">
-                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
-                <mat-card-title>CV Externes</mat-card-title>
-            </div>
-            <mat-card-title>{{externResumesCount}}</mat-card-title>
+            <mat-card-title style="text-align: center;font-size: xxx-large">{{externResumesCount}}</mat-card-title>
         </mat-card>
 
     </div>
 
-    <div class="horizontal-div">
+    <div class="horizontal-div" style="margin: auto;margin-top: 40px">
 
       <mat-card class="bottom-card" style="width: 500px">
         <apx-chart [series]="formationChartSeries"
                    [chart]="formationChartDetails"
                    [labels]="formationChartLabels"
                    [title]="formationChartTitle"
-        ></apx-chart>
-      </mat-card>
-
-      <mat-card class="bottom-card" style="width: 500px">
-        <apx-chart [series]="skillChartSeries"
-                   [chart]="skillChartDetails"
-                   [labels]="skillChartLabels"
-                   [title]="skillChartTitle"
         ></apx-chart>
       </mat-card>
 
@@ -53,8 +59,13 @@
         ></apx-chart>
       </mat-card>
 
-
-
+      <mat-card class="bottom-card" style="width: 500px">
+        <apx-chart [series]="skillChartSeries"
+                   [chart]="skillChartDetails"
+                   [labels]="skillChartLabels"
+                   [title]="skillChartTitle"
+        ></apx-chart>
+      </mat-card>
 
     </div>
 
